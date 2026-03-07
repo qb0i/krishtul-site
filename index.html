@@ -1,0 +1,2175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Krishtul Family — Eleven Generations from Shargorod to America</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+
+  :root {
+    --bg: #faf8f5;
+    --bg-card: #ffffff;
+    --bg-dark: #1c1a17;
+    --text: #2d2d2d;
+    --text-light: #6b6b6b;
+    --text-muted: #999;
+    --accent: #8b6914;
+    --accent-light: #c9a84c;
+    --gold: #c9a84c;
+    --border: #e8e2d8;
+    --shadow: rgba(0,0,0,0.06);
+    --male: #e8f0f8;
+    --male-border: #5b8db8;
+    --female: #fce8ee;
+    --female-border: #c46b84;
+    --direct: #f0e6c8;
+    --direct-border: #c9a84c;
+    --holocaust-bg: #f5f0f0;
+    --holocaust-border: #8b4444;
+    --timeline-line: #c9a84c;
+  }
+
+  /* Dark mode overrides */
+  .dark {
+    --bg: #1a1a1f;
+    --bg-card: #26262d;
+    --text: #e0ddd8;
+    --text-light: #a0a0a0;
+    --text-muted: #707070;
+    --border: #3a3a42;
+    --shadow: rgba(0,0,0,0.25);
+    --male: #1e2a38;
+    --female: #2e1e24;
+    --direct: #2e2818;
+    --holocaust-bg: #2a1e1e;
+  }
+  .dark .hero { background: #111115; }
+  .dark .nav { background: rgba(26,26,31,0.97); border-bottom-color: var(--border); }
+  .dark .footer { background: #111115; }
+  .dark .modal { background: #22222a; }
+  .dark .search-input { background: var(--bg-card); color: var(--text); }
+  .dark .filter-chip { background: var(--bg-card); color: var(--text-light); border-color: var(--border); }
+  .dark .tree-legend { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.06); }
+  .dark .memorial-card.family { background: linear-gradient(145deg, var(--bg-card) 0%, #2a2020 100%); }
+  .dark .memorial-card.family.survivor { background: linear-gradient(145deg, var(--bg-card) 0%, #1e2a20 100%); }
+  .dark .person-card.male { background: linear-gradient(145deg, var(--bg-card) 0%, #1e2a38 100%); }
+  .dark .person-card.female { background: linear-gradient(145deg, var(--bg-card) 0%, #2e1e24 100%); }
+  .dark .person-card.direct { background: linear-gradient(145deg, var(--direct) 0%, #332e18 100%); }
+  .dark .person-card.direct.male { background: linear-gradient(145deg, var(--direct) 0%, #2a2818 100%); }
+  .dark .person-card.direct.female { background: linear-gradient(145deg, var(--direct) 0%, #2a2818 100%); }
+  .dark .modal-notes { background: linear-gradient(145deg, rgba(201,168,76,0.08) 0%, rgba(201,168,76,0.04) 100%); }
+  .dark .lineage-path { background: linear-gradient(145deg, rgba(201,168,76,0.1) 0%, rgba(201,168,76,0.05) 100%); }
+  .dark .gen-count { background: rgba(255,255,255,0.06); }
+  .dark .modal-close { background: var(--bg-card); }
+  .dark .conf-confirmed { background: #1a2e20; }
+  .dark .conf-high { background: #1a2230; }
+  .dark .conf-possible { background: #2e2a18; }
+  .dark .fate-perished { background: #2e1a1a; }
+  .dark .fate-survived { background: #1a2e20; }
+  .dark .fate-unknown { background: #2a2a2a; }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: rgba(201,168,76,0.25);
+    color: var(--text);
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: #1c1a17;
+    color: white;
+    text-align: center;
+    padding: 80px 20px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 100%, rgba(139,105,20,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 100%, rgba(139,105,20,0.06) 0%, transparent 50%);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent 10%, var(--gold) 50%, transparent 90%);
+    opacity: 0.4;
+  }
+  .hero-content {
+    position: relative; z-index: 1; max-width: 800px; margin: 0 auto;
+    animation: fadeInUp 1s ease-out;
+  }
+  .hero-ornament {
+    font-size: 20px; color: var(--gold); letter-spacing: 16px;
+    margin-bottom: 28px; opacity: 0.5;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 14px;
+    color: #f5f0e6;
+    text-shadow: 0 2px 20px rgba(201,168,76,0.15);
+  }
+  .hero-subtitle {
+    font-family: 'Crimson Pro', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(201,168,76,0.7);
+    margin-bottom: 36px;
+    letter-spacing: 0.5px;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 0;
+    flex-wrap: wrap;
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.05rem;
+    color: rgba(245,240,230,0.4);
+    letter-spacing: 0.5px;
+  }
+  .hero-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--gold);
+  }
+  .hero-stat-sep {
+    margin: 0 16px;
+    color: rgba(201,168,76,0.3);
+    font-size: 0.7rem;
+  }
+
+  /* ===== NAV ===== */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250,248,245,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding: 8px 0;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    padding: 8px 16px;
+    border: none;
+    background: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-light);
+    cursor: pointer;
+    border-radius: 20px;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .nav-btn:hover { background: rgba(201,168,76,0.08); color: var(--accent); }
+  .nav-btn.active { background: var(--accent); color: white; box-shadow: 0 2px 8px rgba(139,105,20,0.25); font-weight: 600; }
+  .nav-badge {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 700;
+    background: rgba(0,0,0,0.08);
+    color: var(--text-muted);
+    padding: 1px 6px;
+    border-radius: 8px;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+  .nav-btn.active .nav-badge { background: rgba(255,255,255,0.25); color: white; }
+  .dark .nav-badge { background: rgba(255,255,255,0.1); }
+  .dark-toggle {
+    margin-left: auto;
+    padding: 6px 10px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: none;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  .dark-toggle:hover { border-color: var(--accent-light); }
+
+  /* ===== SECTIONS ===== */
+  .section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    display: none;
+  }
+  .section.active { display: block; animation: fadeInUp 0.5s ease-out; }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--accent);
+    position: relative;
+    display: inline-block;
+  }
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    margin-top: 8px;
+    border-radius: 2px;
+  }
+  .section-desc {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.1rem;
+    color: var(--text-light);
+    font-style: italic;
+    margin-bottom: 40px;
+    margin-top: 12px;
+  }
+
+  /* ===== LINEAGE PATH ===== */
+  .lineage-path {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px 2px;
+    padding: 16px 20px;
+    background: linear-gradient(145deg, rgba(201,168,76,0.08) 0%, rgba(201,168,76,0.04) 100%);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 12px;
+    margin-bottom: 40px;
+  }
+  .lineage-link {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.95rem;
+    color: var(--accent);
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+  .lineage-link:hover {
+    background: rgba(201,168,76,0.15);
+    color: var(--text);
+  }
+  .lineage-arrow {
+    color: var(--accent-light);
+    font-size: 1.1rem;
+    opacity: 0.5;
+    margin: 0 2px;
+  }
+  /* ===== COLOR LEGEND ===== */
+  .tree-legend {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+    padding: 10px 16px;
+    background: rgba(0,0,0,0.02);
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.3px;
+  }
+  .legend-swatch {
+    width: 16px;
+    height: 10px;
+    border-radius: 3px;
+    border: 1px solid rgba(0,0,0,0.1);
+    flex-shrink: 0;
+  }
+  .legend-swatch.gold { background: var(--direct); border-left: 3px solid var(--direct-border); }
+  .legend-swatch.blue { background: var(--male); border-left: 3px solid var(--male-border); }
+  .legend-swatch.pink { background: var(--female); border-left: 3px solid var(--female-border); }
+
+  /* ===== FAMILY TREE ===== */
+  .tree-container {
+    overflow-x: auto;
+    padding: 20px 0;
+  }
+  .tree-svg-wrap {
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .gen-row {
+    margin-bottom: 52px;
+    position: relative;
+    padding-top: 12px;
+  }
+  .gen-row + .gen-row::before {
+    content: '';
+    position: absolute;
+    top: -24px;
+    left: 20px;
+    right: 20px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border) 20%, var(--border) 80%, transparent);
+  }
+  .gen-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 18px;
+    padding-left: 2px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .gen-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--border), transparent 80%);
+  }
+  .gen-count {
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: rgba(0,0,0,0.04);
+    padding: 2px 8px;
+    border-radius: 10px;
+    letter-spacing: 0.5px;
+    text-transform: none;
+  }
+  .gen-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .members-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 16px;
+  }
+  .members-grid .person-card {
+    min-width: unset;
+    max-width: unset;
+    animation: fadeInUp 0.4s ease-out both;
+  }
+  .members-grid .person-card:nth-child(n+5) { animation-delay: 0.05s; }
+  .members-grid .person-card:nth-child(n+9) { animation-delay: 0.1s; }
+  .members-grid .person-card:nth-child(n+13) { animation-delay: 0.15s; }
+  .gen-divider {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 12px 0 8px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .gen-divider::before, .gen-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ===== PERSON CARD ===== */
+  .person-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    min-width: 240px;
+    max-width: 320px;
+    flex: 1;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+  }
+  .person-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+    border-color: var(--accent-light);
+  }
+  .person-card:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+  .person-card.direct {
+    background: linear-gradient(145deg, var(--direct) 0%, #f5ecd4 100%);
+    border-color: var(--direct-border);
+    box-shadow: 0 2px 8px rgba(201,168,76,0.1);
+  }
+  .person-card.male {
+    border-left: 4px solid var(--male-border);
+    background: linear-gradient(145deg, var(--bg-card) 0%, #f5f8fc 100%);
+  }
+  .person-card.female {
+    border-left: 4px solid var(--female-border);
+    background: linear-gradient(145deg, var(--bg-card) 0%, #fdf5f7 100%);
+  }
+  .person-card.direct.male {
+    border-left: 4px solid var(--direct-border);
+    background: linear-gradient(145deg, var(--direct) 0%, #f0ebd0 100%);
+    border-top: 3px solid var(--male-border);
+  }
+  .person-card.direct.female {
+    border-left: 4px solid var(--direct-border);
+    background: linear-gradient(145deg, var(--direct) 0%, #f0ebd0 100%);
+    border-top: 3px solid var(--female-border);
+  }
+  .person-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .person-hebrew {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+  .person-dates {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    margin-bottom: 4px;
+    letter-spacing: 0.3px;
+  }
+  .person-place {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    letter-spacing: 0.2px;
+  }
+  .person-relation {
+    display: block;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent);
+    font-weight: 600;
+    text-align: right;
+    margin-bottom: 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .person-badge {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .badge-direct { background: linear-gradient(135deg, #c9a84c, #b8952e); color: white; }
+  .badge-holocaust { background: linear-gradient(135deg, #8b4444, #6e3535); color: white; }
+  .badge-survivor { background: linear-gradient(135deg, #448b5e, #357049); color: white; }
+  .person-source {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: 0.2px;
+  }
+
+  /* ===== MODAL ===== */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    z-index: 200;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  .modal-overlay.open { display: flex; animation: fadeIn 0.25s ease-out; }
+  .modal {
+    background: var(--bg);
+    border-radius: 16px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 40px;
+    position: relative;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.35), 0 0 0 1px rgba(201,168,76,0.15);
+    animation: fadeInUp 0.3s ease-out;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+  .modal::-webkit-scrollbar { width: 6px; }
+  .modal::-webkit-scrollbar-track { background: transparent; }
+  .modal::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  .modal-close {
+    position: sticky;
+    top: 0;
+    float: right;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-light);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    transition: all 0.2s;
+  }
+  .modal-close:hover { background: rgba(0,0,0,0.05); border-color: var(--accent-light); color: var(--accent); }
+  .modal h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    margin-bottom: 4px;
+    color: var(--accent);
+  }
+  .modal-hebrew {
+    font-family: 'Crimson Pro', serif;
+    font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+  .modal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 4px 20px;
+  }
+  .modal-field {
+    margin-bottom: 14px;
+  }
+  .modal-field.full {
+    grid-column: 1 / -1;
+  }
+  .modal-field-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .modal-field-value {
+    font-size: 0.95rem;
+    color: var(--text);
+  }
+  .modal-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 20px 0;
+  }
+  .modal-badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .modal-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .modal-link {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--accent);
+    cursor: pointer;
+  }
+  .modal-link:hover {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+  .modal-id {
+    margin-top: 16px;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-align: right;
+    letter-spacing: 1px;
+  }
+  .modal-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .modal-nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg-card);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all 0.2s;
+    max-width: 45%;
+  }
+  .modal-nav-btn:hover {
+    border-color: var(--accent-light);
+    color: var(--accent);
+    background: rgba(201,168,76,0.06);
+  }
+  .modal-nav-btn .nav-arrow {
+    font-size: 1rem;
+    color: var(--accent-light);
+    flex-shrink: 0;
+  }
+  .modal-nav-btn .nav-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .modal-nav-btn.next { margin-left: auto; text-align: right; }
+  .modal-notes {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-light);
+    background: linear-gradient(145deg, rgba(201,168,76,0.06) 0%, rgba(201,168,76,0.1) 100%);
+    padding: 18px 20px;
+    border-radius: 8px;
+    border-left: 3px solid var(--gold);
+    margin-top: 20px;
+  }
+  .modal-notes::before {
+    content: 'Notes';
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  /* ===== TIMELINE ===== */
+  .timeline {
+    position: relative;
+    padding-left: 40px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--gold), var(--border));
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 32px;
+    padding: 20px 24px;
+    background: var(--bg-card);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+  .timeline-item:hover {
+    box-shadow: 0 4px 20px var(--shadow);
+    border-color: var(--accent-light);
+    transform: translateX(4px);
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -33px;
+    top: 24px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 3px solid var(--bg);
+    box-shadow: 0 0 0 2px var(--gold);
+  }
+  .timeline-item.holocaust::before { background: #8b4444; box-shadow: 0 0 0 2px #8b4444; }
+  .timeline-item.birth::before { background: #448b5e; box-shadow: 0 0 0 2px #448b5e; }
+
+  .timeline-year {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .timeline-event {
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .timeline-context {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-style: italic;
+  }
+  .timeline-location {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 6px;
+    padding-top: 6px;
+    border-top: 1px solid rgba(0,0,0,0.04);
+    letter-spacing: 0.3px;
+  }
+  .timeline-location::before {
+    content: '\25C8 ';
+    font-size: 0.6rem;
+    opacity: 0.5;
+  }
+  .timeline-era {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent);
+    padding: 8px 0 20px 0;
+    margin-left: -40px;
+    padding-left: 40px;
+    position: relative;
+  }
+  .timeline-era::before {
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    width: 8px;
+    height: 8px;
+    border: 2px solid var(--gold);
+    background: var(--bg);
+    border-radius: 2px;
+    transform: rotate(45deg);
+  }
+
+  /* ===== HOLOCAUST MEMORIAL ===== */
+  .memorial-intro {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-light);
+    margin-bottom: 40px;
+    max-width: 700px;
+    padding-left: 20px;
+    border-left: 3px solid #8b4444;
+  }
+  .memorial-stats {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .memorial-stat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    font-family: 'Crimson Pro', serif;
+  }
+  .memorial-stat-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .memorial-stat-dot.perished { background: #8b4444; }
+  .memorial-stat-dot.survived { background: #448b5e; }
+  .memorial-stat-dot.unknown { background: #999; }
+  .memorial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+  }
+  .memorial-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    border-left: 4px solid #8b4444;
+    transition: all 0.3s;
+  }
+  .memorial-card:hover {
+    box-shadow: 0 4px 16px rgba(139,68,68,0.1);
+  }
+  .memorial-card.survivor {
+    border-left-color: #448b5e;
+  }
+  .memorial-card.survivor:hover {
+    box-shadow: 0 4px 16px rgba(68,139,94,0.1);
+  }
+  .memorial-card.family {
+    background: linear-gradient(145deg, var(--bg-card) 0%, #faf5f5 100%);
+  }
+  .memorial-card.family.survivor {
+    background: linear-gradient(145deg, var(--bg-card) 0%, #f5faf7 100%);
+  }
+  .memorial-card .person-name {
+    font-size: 1rem;
+    font-family: 'Playfair Display', serif;
+  }
+  .memorial-card .detail {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+  .memorial-card .fate {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 12px;
+    padding: 4px 12px;
+    border-radius: 8px;
+    display: inline-block;
+  }
+  .fate-perished { background: #f5e0e0; color: #8b4444; }
+  .fate-survived { background: #e0f5e8; color: #2d6e3f; }
+  .fate-unknown { background: #f0f0f0; color: #666; }
+
+  /* ===== DISCOVERIES ===== */
+  .discoveries-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 16px;
+  }
+  .discovery-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: all 0.3s;
+    border-left: 4px solid var(--border);
+  }
+  .discovery-card:hover {
+    box-shadow: 0 6px 20px var(--shadow);
+    transform: translateX(3px);
+    border-color: var(--accent-light);
+  }
+  .discovery-card.conf-card-confirmed { border-left-color: #2d6e3f; }
+  .discovery-card.conf-card-high { border-left-color: #3a6ea5; }
+  .discovery-card.conf-card-possible { border-left-color: #c9a84c; }
+  .discovery-type {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .discovery-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .discovery-detail {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+  .confidence-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-left: 8px;
+  }
+  .conf-confirmed { background: #e0f5e8; color: #2d6e3f; }
+  .conf-high { background: #e8f0f8; color: #3a6ea5; }
+  .conf-possible { background: #f5f0e0; color: #8b6914; }
+
+  /* ===== CONNECTED FAMILIES ===== */
+  .families-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+  }
+  .family-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: all 0.3s;
+  }
+  .family-card:hover {
+    box-shadow: 0 4px 16px var(--shadow);
+    border-color: var(--accent-light);
+    transform: translateY(-2px);
+  }
+  .family-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+  }
+  .family-connection {
+    font-family: 'Crimson Pro', serif;
+    font-size: 0.95rem;
+    color: var(--text-light);
+    font-style: italic;
+    margin-bottom: 12px;
+  }
+  .family-detail {
+    font-size: 0.9rem;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  /* ===== SEARCH ===== */
+  .search-bar {
+    margin-bottom: 30px;
+    position: relative;
+    max-width: 500px;
+  }
+  .search-bar::before {
+    content: '\1F50D';
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.9rem;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  .search-input {
+    width: 100%;
+    padding: 14px 20px 14px 44px;
+    border: 2px solid var(--border);
+    border-radius: 30px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.3s;
+    background: var(--bg-card);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .search-input:focus {
+    border-color: var(--accent-light);
+    box-shadow: 0 4px 16px rgba(201,168,76,0.15);
+  }
+  .search-input::placeholder { color: var(--text-muted); }
+
+  /* ===== FILTER CHIPS ===== */
+  .filter-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .filter-chip {
+    padding: 5px 14px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--bg-card);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .filter-chip:hover { border-color: var(--accent-light); color: var(--accent); }
+  .filter-chip.active { background: var(--accent); color: white; border-color: var(--accent); font-weight: 600; }
+  .filter-chip .chip-count {
+    font-size: 0.65rem;
+    opacity: 0.7;
+    margin-left: 4px;
+  }
+  .filter-chip.active .chip-count { opacity: 0.85; }
+
+  .no-results {
+    text-align: center;
+    padding: 60px 40px;
+    color: var(--text-muted);
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+  }
+  .member-count {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-align: right;
+    margin-bottom: 12px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 60px 20px 40px;
+    background: #1c1a17;
+    color: rgba(245,240,230,0.35);
+    font-size: 0.8rem;
+    position: relative;
+  }
+  .footer::before {
+    content: '\2726  \2726  \2726';
+    display: block;
+    margin-bottom: 28px;
+    font-size: 16px;
+    letter-spacing: 16px;
+    color: var(--gold);
+    opacity: 0.4;
+  }
+  .footer-line {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: rgba(245,240,230,0.55);
+    margin-bottom: 16px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.8;
+  }
+
+  /* ===== SCROLL TO TOP ===== */
+  .scroll-top {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--bg-dark);
+    color: var(--gold);
+    border: 1px solid rgba(201,168,76,0.3);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    z-index: 150;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  }
+  .scroll-top.visible { opacity: 1; visibility: visible; }
+  .scroll-top:hover { background: var(--accent); color: white; transform: translateY(-2px); }
+
+  @media (max-width: 768px) {
+    /* Hero */
+    .hero { padding: 48px 16px 36px; }
+    .hero h1 { letter-spacing: 1px; }
+    .hero-ornament { font-size: 16px; letter-spacing: 10px; margin-bottom: 20px; }
+    .hero-subtitle { margin-bottom: 24px; }
+    .hero-stats { font-size: 0.88rem; gap: 4px; }
+    .hero-stat-sep { margin: 0 8px; }
+
+    /* Nav */
+    .nav { padding: 0 12px; }
+    .nav-inner { padding: 6px 0; gap: 2px; }
+    .nav-btn { padding: 8px 14px; font-size: 0.78rem; }
+    .nav-badge { display: none; }
+    .dark-toggle { padding: 5px 8px; font-size: 0.8rem; }
+
+    /* Sections */
+    .section { padding: 36px 16px; }
+    .section-title { font-size: 1.6rem; }
+    .section-desc { font-size: 1rem; margin-bottom: 28px; }
+
+    /* Lineage path */
+    .lineage-path { padding: 12px 14px; gap: 2px 0; margin-bottom: 20px; }
+    .lineage-link { font-size: 0.85rem; padding: 2px 4px; }
+    .lineage-arrow { font-size: 0.9rem; margin: 0 1px; }
+
+    /* Legend */
+    .tree-legend { gap: 12px; padding: 8px 12px; margin-bottom: 24px; }
+    .legend-item { font-size: 0.68rem; }
+
+    /* Memorial stats */
+    .memorial-stats { gap: 12px; margin-bottom: 20px; }
+    .memorial-stat { font-size: 0.75rem; }
+
+    /* Cards */
+    .person-card { min-width: 100%; max-width: 100%; padding: 16px; }
+    .person-card:hover { transform: none; box-shadow: none; }
+    .person-card:active { transform: scale(0.98); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .person-name { font-size: 1.05rem; }
+    .gen-row { margin-bottom: 36px; }
+    .gen-row + .gen-row::before { display: none; }
+    .gen-label { font-size: 0.72rem; letter-spacing: 2px; margin-bottom: 12px; }
+    .gen-label .gen-count { font-size: 0.6rem; }
+    .gen-cards { gap: 10px; }
+    .gen-divider { margin: 8px 0 6px; font-size: 0.65rem; letter-spacing: 1.5px; }
+
+    /* Grids */
+    .members-grid { grid-template-columns: 1fr; gap: 10px; }
+    .members-grid .person-card { min-width: unset; max-width: unset; }
+    .memorial-grid { grid-template-columns: 1fr; }
+    .families-grid { grid-template-columns: 1fr; }
+    .discoveries-grid { grid-template-columns: 1fr; }
+
+    /* Search & Filters */
+    .search-bar { max-width: 100%; }
+    .search-input { padding: 12px 16px 12px 40px; font-size: 0.9rem; }
+    .filter-chips { gap: 6px; margin-bottom: 12px; }
+    .filter-chip { padding: 4px 10px; font-size: 0.68rem; }
+
+    /* Modal */
+    .modal { padding: 20px 18px; margin: 8px; max-height: 90vh; border-radius: 12px; }
+    .modal-grid { grid-template-columns: 1fr; }
+    .modal h2 { font-size: 1.35rem; padding-right: 40px; }
+    .modal-close { width: 32px; height: 32px; font-size: 1.3rem; }
+    .modal-notes { padding: 14px 16px; font-size: 0.95rem; }
+
+    /* Timeline */
+    .timeline { padding-left: 30px; }
+    .timeline-item { padding: 16px; }
+    .timeline-year { font-size: 1.15rem; }
+    .timeline-event { font-size: 0.9rem; }
+    .timeline-item:hover { transform: none; }
+    .timeline-era { font-size: 0.6rem; letter-spacing: 2px; margin-left: -30px; padding-left: 30px; }
+    .timeline-era::before { left: 9px; width: 6px; height: 6px; }
+
+    /* Memorial */
+    .memorial-intro { font-size: 1rem; padding-left: 16px; }
+    .memorial-card { padding: 16px; }
+    .memorial-card:hover { box-shadow: none; }
+
+    /* Discoveries & Families */
+    .discovery-card:hover { transform: none; box-shadow: none; }
+    .family-card:hover { transform: none; box-shadow: none; }
+
+    /* Source on cards */
+    .person-source { font-size: 0.68rem; margin-top: 6px; padding-top: 6px; }
+
+    /* Scroll to top */
+    .scroll-top { bottom: 16px; right: 16px; width: 38px; height: 38px; font-size: 1rem; }
+
+    /* Modal nav */
+    .modal-nav-btn { padding: 6px 10px; font-size: 0.72rem; }
+
+    /* Footer */
+    .footer { padding: 40px 16px 28px; }
+    .footer-line { font-size: 0.95rem; line-height: 1.7; }
+  }
+  /* ===== PRINT ===== */
+  @media print {
+    body { background: white; }
+    .hero { padding: 30px 20px; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .hero::before, .hero::after { display: none; }
+    .nav, .scroll-top, .modal-overlay, .search-bar, .member-count { display: none !important; }
+    .section { display: block !important; padding: 20px 0; page-break-inside: avoid; }
+    .section-title { font-size: 1.4rem; }
+    .person-card { break-inside: avoid; box-shadow: none; border: 1px solid #ddd; }
+    .person-card:hover { transform: none; box-shadow: none; }
+    .gen-cards { gap: 10px; }
+    .gen-row { margin-bottom: 24px; page-break-inside: avoid; }
+    .timeline-item { break-inside: avoid; box-shadow: none; }
+    .memorial-card { break-inside: avoid; box-shadow: none; }
+    .discovery-card { break-inside: avoid; box-shadow: none; }
+    .footer { padding: 20px; }
+    .lineage-path { border: 1px solid #ddd; }
+    a { text-decoration: none; color: inherit; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero" style="cursor:pointer" onclick="document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelector('[data-section=tree]').classList.add('active');document.getElementById('tree').classList.add('active');window.scrollTo({top:0,behavior:'smooth'});">
+  <div class="hero-content">
+    <div class="hero-ornament">&#10017; &#10022; &#10017;</div>
+    <h1>The Krishtul Family</h1>
+    <p class="hero-subtitle">Eleven generations from Shargorod to America &middot; c. 1770 &ndash; Present</p>
+    <div class="hero-stats">
+      <span class="hero-stat-num">11</span>&nbsp;Generations
+      <span class="hero-stat-sep">&middot;</span>
+      <span class="hero-stat-num">250+</span>&nbsp;Years
+      <span class="hero-stat-sep">&middot;</span>
+      <span class="hero-stat-num">64</span>&nbsp;Documented Members
+    </div>
+  </div>
+</div>
+
+<!-- SCROLL TO TOP -->
+<button class="scroll-top" id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">&#9650;</button>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <button class="nav-btn active" data-section="tree">Family Tree<span class="nav-badge">11 gen</span></button>
+    <button class="nav-btn" data-section="timeline">Timeline<span class="nav-badge">35</span></button>
+    <button class="nav-btn" data-section="holocaust">Holocaust Memorial<span class="nav-badge">15</span></button>
+    <button class="nav-btn" data-section="discoveries">Discoveries<span class="nav-badge">19</span></button>
+    <button class="nav-btn" data-section="families">Connected Families<span class="nav-badge">12</span></button>
+    <button class="nav-btn" data-section="all">All Members<span class="nav-badge">64</span></button>
+    <button class="dark-toggle" id="dark-toggle" onclick="document.body.classList.toggle('dark');this.textContent=document.body.classList.contains('dark')?'☀':'☾'" title="Toggle dark mode">☾</button>
+  </div>
+</nav>
+
+<!-- FAMILY TREE -->
+<div class="section active" id="tree">
+  <p class="section-desc">From Gdal in 18th-century Shargorod to Joshua in 21st-century Florida &mdash; the direct line is highlighted in gold</p>
+  <div class="lineage-path">
+    <span class="lineage-link" onclick="showPerson('K01')">Gdal</span>
+    <span class="lineage-arrow">&rsaquo;</span>
+    <span class="lineage-link" onclick="showPerson('K02')">Meyer Leyb</span>
+    <span class="lineage-arrow">&rsaquo;</span>
+    <span class="lineage-link" onclick="showPerson('K04')">Moyshe Ayzyk</span>
+    <span class="lineage-arrow">&rsaquo;</span>
+    <span class="lineage-link" onclick="showPerson('K08')">Srul</span>
+    <span class="lineage-arrow">&rsaquo;</span>
+    <span class="lineage-link" onclick="showPerson('K11')">Miron</span>
+    <span class="lineage-arrow">&rsaquo;</span>
+    <span class="lineage-link" onclick="showPerson('K70')">Israel Leib</span>
+    <span class="lineage-arrow">&rsaquo;</span>
+    <span class="lineage-link" onclick="showPerson('K66')">Lev</span>
+    <span class="lineage-arrow">&rsaquo;</span>
+    <span class="lineage-link" onclick="showPerson('K16')">Vladimir</span>
+    <span class="lineage-arrow">&rsaquo;</span>
+    <span class="lineage-link" onclick="showPerson('K18')">Leon</span>
+    <span class="lineage-arrow">&rsaquo;</span>
+    <span class="lineage-link" onclick="showPerson('K20')">Max</span>
+    <span class="lineage-arrow">&rsaquo;</span>
+    <span class="lineage-link" onclick="showPerson('K23')">Joshua</span>
+  </div>
+
+  <div class="tree-legend">
+    <div class="legend-item"><span class="legend-swatch gold"></span> Direct ancestor</div>
+    <div class="legend-item"><span class="legend-swatch blue"></span> Male</div>
+    <div class="legend-item"><span class="legend-swatch pink"></span> Female</div>
+  </div>
+
+  <!-- Gen I -->
+  <div class="gen-row">
+    <div class="gen-label">Generation I &middot; c. 1770 <span class="gen-count">1 member</span></div>
+    <div class="gen-cards">
+      <div class="person-card direct male" onclick="showPerson('K01')">
+        <span class="person-relation">7x Great-Grandfather</span>
+        <div class="person-name">Gdal (Gedalia) Krishtul</div>
+        <div class="person-hebrew">Gedalia</div>
+        <div class="person-dates">Born c. 1770&ndash;1785</div>
+        <div class="person-place">Shargorod, Podolia</div>
+        <span class="person-badge badge-direct">Patriarch</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gen II -->
+  <div class="gen-row">
+    <div class="gen-label">Generation II &middot; c. 1796 <span class="gen-count">2 members</span></div>
+    <div class="gen-cards">
+      <div class="person-card direct male" onclick="showPerson('K02')">
+        <span class="person-relation">6x Great-GF</span>
+        <div class="person-name">Meyer Leyb Krishtul</div>
+        <div class="person-hebrew">Meir Leib</div>
+        <div class="person-dates">Born c. 1796</div>
+        <div class="person-place">Shargorod</div>
+        <span class="person-badge badge-direct">Direct Line</span>
+      </div>
+      <div class="person-card direct female" onclick="showPerson('K03')">
+        <span class="person-relation">6x Great-GM</span>
+        <div class="person-name">Charna bat Ioyna</div>
+        <div class="person-dates">Born c. 1796</div>
+        <div class="person-place">Wife of Meyer Leyb</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gen III -->
+  <div class="gen-row">
+    <div class="gen-label">Generation III &middot; c. 1821&ndash;1840 <span class="gen-count">8 members</span></div>
+    <div class="gen-cards">
+      <div class="person-card direct male" onclick="showPerson('K04')">
+        <span class="person-relation">5x Great-GF</span>
+        <div class="person-name">Moyshe Ayzyk Krishtul</div>
+        <div class="person-hebrew">Moshe Aizik</div>
+        <div class="person-dates">Born c. 1821 &middot; Died Jun 10, 1903</div>
+        <div class="person-place">Shargorod</div>
+        <span class="person-badge badge-direct">Direct Line</span>
+      </div>
+      <div class="person-card female" onclick="showPerson('K67')">
+        <span class="person-relation">1st Wife</span>
+        <div class="person-name">Khana Sura bat Sender</div>
+        <div class="person-place">Divorced 1849</div>
+      </div>
+      <div class="person-card direct female" onclick="showPerson('K05')">
+        <span class="person-relation">5x Great-GM</span>
+        <div class="person-name">Kreyntsya bat Sender</div>
+        <div class="person-dates">Born c. 1830</div>
+        <div class="person-place">2nd wife (direct line)</div>
+      </div>
+      <div class="person-card female" onclick="showPerson('K68')">
+        <span class="person-relation">3rd Wife</span>
+        <div class="person-name">Gisya bat Gdal</div>
+        <div class="person-place">Shargorod</div>
+      </div>
+      <div class="gen-divider">Brothers of Moyshe Ayzyk</div>
+      <div class="person-card male" onclick="showPerson('K26')">
+        <span class="person-relation">5x Great-Uncle</span>
+        <div class="person-name">Gdal II Krishtul</div>
+        <div class="person-dates">Born c. 1824 &middot; Died Nov 22, 1874</div>
+        <div class="person-place">Shargorod</div>
+      </div>
+      <div class="person-card male" onclick="showPerson('K27')">
+        <span class="person-relation">5x Great-Uncle</span>
+        <div class="person-name">Borukh Krishtul</div>
+        <div class="person-place">Shargorod</div>
+      </div>
+      <div class="person-card male" onclick="showPerson('K28')">
+        <span class="person-relation">5x Great-Uncle</span>
+        <div class="person-name">Fayvish (Favel) Krishtul</div>
+        <div class="person-dates">Born c. 1834</div>
+        <div class="person-place">Shargorod</div>
+      </div>
+      <div class="person-card male" onclick="showPerson('K29')">
+        <span class="person-relation">5x Great-Uncle</span>
+        <div class="person-name">Yankel Krishtul</div>
+        <div class="person-dates">Born c. 1840</div>
+        <div class="person-place">Shargorod</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gen IV -->
+  <div class="gen-row">
+    <div class="gen-label">Generation IV &middot; 1851&ndash;1876 <span class="gen-count">6 members</span></div>
+    <div class="gen-cards">
+      <div class="person-card female" onclick="showPerson('K06')">
+        <span class="person-relation">4x Great-Aunt</span>
+        <div class="person-name">Toyba Ginda Krishtul</div>
+        <div class="person-dates">Born Dec 18, 1851</div>
+        <div class="person-place">Shargorod</div>
+      </div>
+      <div class="person-card female" onclick="showPerson('K07')">
+        <span class="person-relation">4x Great-Aunt</span>
+        <div class="person-name">Ryvka Serlya Krishtul</div>
+        <div class="person-dates">Born Apr 28, 1855</div>
+        <div class="person-place">Shargorod</div>
+      </div>
+      <div class="person-card direct male" onclick="showPerson('K08')">
+        <span class="person-relation">4x Great-GF</span>
+        <div class="person-name">Srul (Israel) Krishtul</div>
+        <div class="person-hebrew">Yisrael</div>
+        <div class="person-dates">Born Dec 22, 1857 &middot; Died Feb 25, 1880</div>
+        <div class="person-place">Shargorod</div>
+        <span class="person-badge badge-direct">Direct Line</span>
+      </div>
+      <div class="person-card male" onclick="showPerson('K09')">
+        <span class="person-relation">4x Great-Uncle</span>
+        <div class="person-name">Usher Zeylik Krishtul</div>
+        <div class="person-dates">Born May 15, 1870 &middot; Died Jan 23, 1897</div>
+        <div class="person-place">Shargorod</div>
+      </div>
+      <div class="person-card male" onclick="showPerson('K10')">
+        <span class="person-relation">4x Great-Uncle</span>
+        <div class="person-name">Gdal (son of Moyshe)</div>
+        <div class="person-dates">Born Feb 10, 1876</div>
+        <div class="person-place">Shargorod</div>
+      </div>
+      <div class="gen-divider">From Yankel&rsquo;s branch</div>
+      <div class="person-card female" onclick="showPerson('K71')">
+        <span class="person-relation">4x Great-Aunt</span>
+        <div class="person-name">Khana Krishtul</div>
+        <div class="person-dates">Born May 10, 1862</div>
+        <div class="person-place">Married Shafir (1881)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gen V -->
+  <div class="gen-row">
+    <div class="gen-label">Generation V &middot; c. 1880 <span class="gen-count">1 member</span></div>
+    <div class="gen-cards">
+      <div class="person-card direct male" onclick="showPerson('K11')">
+        <span class="person-relation">3x Great-GF</span>
+        <div class="person-name">Miron Srulevich Krishtul</div>
+        <div class="person-hebrew">Meir HaKohen</div>
+        <div class="person-dates">Born c. 1880</div>
+        <div class="person-place">Murafa / Podolia</div>
+        <span class="person-badge badge-direct">Direct Line</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gen VI -->
+  <div class="gen-row">
+    <div class="gen-label">Generation VI &middot; c. 1890s <span class="gen-count">1 member</span></div>
+    <div class="gen-cards">
+      <div class="person-card direct male" onclick="showPerson('K70')">
+        <span class="person-relation">2x Great-GF</span>
+        <div class="person-name">Israel Leib Meirovich Krishtul</div>
+        <div class="person-hebrew">Israel Leib HaKohen</div>
+        <div class="person-dates">Died Sep 28, 1948</div>
+        <div class="person-place">Mohyliv-Podilskyi</div>
+        <span class="person-badge badge-survivor">Holocaust Survivor</span>
+        <span class="person-badge badge-direct">Direct Line</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gen VII -->
+  <div class="gen-row">
+    <div class="gen-label">Generation VII &middot; c. 1911 <span class="gen-count">5 members</span></div>
+    <div class="gen-cards">
+      <div class="person-card direct male" onclick="showPerson('K66')">
+        <span class="person-relation">Great-GF</span>
+        <div class="person-name">Lev Izrailovich Krishtul</div>
+        <div class="person-hebrew">Leib Meir HaKohen</div>
+        <div class="person-dates">Born c. 1911 &middot; Died Mar 23, 1947</div>
+        <div class="person-place">Murafa / Mohyliv-Podilskyi</div>
+        <span class="person-badge badge-direct">Direct Line</span>
+      </div>
+      <div class="person-card direct female" onclick="showPerson('K12')">
+        <span class="person-relation">Great-GM</span>
+        <div class="person-name">Raya Moiseyevna Ripa</div>
+        <div class="person-dates">Born May 9, 1914 &middot; Died Jan 12, 2004</div>
+        <div class="person-place">Shargorod / Yampol</div>
+        <span class="person-badge badge-survivor">Holocaust Survivor</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gen VIII -->
+  <div class="gen-row">
+    <div class="gen-label">Generation VIII &middot; 1937 <span class="gen-count">5 members</span></div>
+    <div class="gen-cards">
+      <div class="person-card direct male" onclick="showPerson('K16')">
+        <span class="person-relation">Grandfather</span>
+        <div class="person-name">Vladimir Mironovich Krishtul</div>
+        <div class="person-dates">Born Jun 17, 1937</div>
+        <div class="person-place">Mohyliv-Podilskyi</div>
+        <span class="person-badge badge-survivor">Holocaust Survivor</span>
+      </div>
+      <div class="person-card direct female" onclick="showPerson('K17')">
+        <span class="person-relation">Grandmother</span>
+        <div class="person-name">Bronya Kovalevna</div>
+        <div class="person-place">Wife of Vladimir Krishtul</div>
+      </div>
+      <div class="person-card female" onclick="showPerson('K14')">
+        <span class="person-relation">Grandaunt</span>
+        <div class="person-name">Maya Krishtul</div>
+        <div class="person-place">Mohyliv-Podilskyi</div>
+        <span class="person-badge badge-holocaust">Holocaust Victim</span>
+      </div>
+      <div class="person-card female" onclick="showPerson('K15')">
+        <span class="person-relation">Grandaunt</span>
+        <div class="person-name">Bella Krishtul</div>
+        <div class="person-place">Mohyliv-Podilskyi</div>
+        <span class="person-badge badge-holocaust">Holocaust Victim</span>
+      </div>
+      <div class="person-card male" onclick="showPerson('K13')">
+        <span class="person-relation">Granduncle</span>
+        <div class="person-name">Yacov Krishtul</div>
+        <div class="person-place">Haifa, Israel</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gen IX -->
+  <div class="gen-row">
+    <div class="gen-label">Generation IX &middot; 1962 <span class="gen-count">3 members</span></div>
+    <div class="gen-cards">
+      <div class="person-card direct male" onclick="showPerson('K18')">
+        <span class="person-relation">Father</span>
+        <div class="person-name">Leon Vladimirovich Krishtul</div>
+        <div class="person-dates">Born Aug 13, 1962</div>
+        <div class="person-place">Mohyliv-Podilskyi</div>
+        <span class="person-badge badge-direct">Direct Line</span>
+      </div>
+      <div class="person-card direct female" onclick="showPerson('K51')">
+        <span class="person-relation">Mother</span>
+        <div class="person-name">Svetlana Pruzhansky</div>
+        <div class="person-dates">Born Jun 10, 1963</div>
+        <div class="person-place">Mohyliv-Podilskyi</div>
+      </div>
+      <div class="person-card male" onclick="showPerson('K19')">
+        <span class="person-relation">Uncle</span>
+        <div class="person-name">Steve Krishtul</div>
+        <div class="person-place">Mohyliv-Podilskyi</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gen X -->
+  <div class="gen-row">
+    <div class="gen-label">Generation X &middot; 1986 <span class="gen-count">5 members</span></div>
+    <div class="gen-cards">
+      <div class="person-card direct male" onclick="showPerson('K20')">
+        <span class="person-relation">Generation X</span>
+        <div class="person-name">Max Leonidovich Krishtul</div>
+        <div class="person-dates">Born Aug 6, 1986</div>
+        <div class="person-place">Mohyliv-Podilskyi &rarr; NYC &rarr; Miami, FL</div>
+      </div>
+      <div class="person-card female" onclick="showPerson('K22')">
+        <span class="person-relation">Wife</span>
+        <div class="person-name">Larisa Tuchinskaya</div>
+        <div class="person-dates">Born Jan 7, 1988</div>
+      </div>
+      <div class="person-card female" onclick="showPerson('K21')">
+        <span class="person-relation">Sister</span>
+        <div class="person-name">Nicole Krishtul</div>
+        <div class="person-dates">Born Jan 4, 1996</div>
+        <div class="person-place">Manhattan, NY</div>
+        <span class="person-badge badge-direct">First American-Born</span>
+      </div>
+      <div class="person-card male" onclick="showPerson('K54')">
+        <span class="person-relation">Cousin</span>
+        <div class="person-name">Eduard Krishtul</div>
+        <div class="person-place">Son of Steve</div>
+      </div>
+      <div class="person-card male" onclick="showPerson('K55')">
+        <span class="person-relation">Cousin</span>
+        <div class="person-name">Gabriel Krishtul</div>
+        <div class="person-place">Son of Steve</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gen XI -->
+  <div class="gen-row">
+    <div class="gen-label">Generation XI &middot; Next Generation <span class="gen-count">4 members</span></div>
+    <div class="gen-cards">
+      <div class="person-card direct female" onclick="showPerson('K24')">
+        <span class="person-relation">Daughter</span>
+        <div class="person-name">Allison Krishtul</div>
+        <div class="person-dates">Born Apr 12, 2016</div>
+        <div class="person-place">Florida</div>
+      </div>
+      <div class="person-card direct male" onclick="showPerson('K23')">
+        <span class="person-relation">Son</span>
+        <div class="person-name">Joshua Krishtul</div>
+        <div class="person-dates">Born Sep 8, 2018</div>
+        <div class="person-place">Hollywood, Florida</div>
+      </div>
+      <div class="person-card direct male" onclick="showPerson('K25')">
+        <span class="person-relation">Son</span>
+        <div class="person-name">Jacob Krishtul</div>
+        <div class="person-dates">Born Feb 3, 2023</div>
+        <div class="person-place">Florida</div>
+      </div>
+      <div class="person-card male" onclick="showPerson('K56')">
+        <span class="person-relation">1st Cousin 1x Removed</span>
+        <div class="person-name">Aron Krishtul</div>
+        <div class="person-place">Hollywood, FL &middot; Son of Eduard</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<div class="section" id="timeline">
+  <h2 class="section-title">Family Timeline</h2>
+  <p class="section-desc">250 years of the Krishtul story, set against the sweep of history</p>
+  <div class="timeline" id="timeline-content"></div>
+</div>
+
+<!-- HOLOCAUST MEMORIAL -->
+<div class="section" id="holocaust">
+  <h2 class="section-title">Holocaust Memorial</h2>
+  <p class="memorial-intro">
+    In July 1941, the Nazi and Romanian occupation reached Mohyliv-Podilskyi. The Krishtul family endured the ghetto, then were sent to the Pechora death camp. Raya Krishtul lost her daughters Bella and Maya there &mdash; they died of hunger, cold, and disease. She escaped by climbing the camp fence with her toddler son Vladimir. Israel Leib, Raya's father-in-law and a tailor by trade, survived by obtaining a sewing machine and making suits; locals helped him escape the camp and he later repaid them. Her husband Lev served at the front and survived the war, only to be killed accidentally in 1947.
+  </p>
+  <div class="memorial-stats" id="memorial-stats"></div>
+  <div class="memorial-grid" id="holocaust-grid"></div>
+</div>
+
+<!-- DISCOVERIES -->
+<div class="section" id="discoveries">
+  <h2 class="section-title">Research Discoveries</h2>
+  <p class="section-desc">Key connections uncovered through archival research, oral testimony, and genealogical analysis</p>
+  <div class="discoveries-grid" id="discoveries-content"></div>
+</div>
+
+<!-- CONNECTED FAMILIES -->
+<div class="section" id="families">
+  <h2 class="section-title">Connected Families</h2>
+  <p class="section-desc">12 families linked to the Krishtul tree through marriage, shared records, and common geography</p>
+  <div class="families-grid" id="families-content"></div>
+</div>
+
+<!-- ALL MEMBERS -->
+<div class="section" id="all">
+  <h2 class="section-title">All Family Members</h2>
+  <p class="section-desc">Every documented member of the extended family &mdash; press <kbd style="background:rgba(0,0,0,0.06);padding:2px 6px;border-radius:4px;font-size:0.8em;font-family:monospace;border:1px solid var(--border);">/</kbd> to search from anywhere</p>
+  <div class="search-bar">
+    <input type="text" class="search-input" id="search" placeholder="Search by name, place, year, or source..." oninput="filterMembers()">
+  </div>
+  <div class="filter-chips" id="filter-chips"></div>
+  <div class="member-count" id="member-count"></div>
+  <div class="members-grid" id="all-members"></div>
+  <div class="no-results" id="no-results" style="display:none;">No family members match your search</div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal-content"></div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p class="footer-line">"They were tailors and barbers in a small Jewish town in Podolia. They outlasted empires, survived pogroms and death camps, buried children and men whose lives were cut short. From Shargorod they scattered across continents to start anew &mdash; and eleven generations later, the Krishtuls endure."</p>
+  <p>Krishtul Family Research &middot; Compiled from Ukrainian State Archives, JewishGen, Yad Vashem, and Shoah Foundation records</p>
+  <p style="margin-top:12px;font-size:0.72rem;opacity:0.5;">c. 1770 &ndash; Present &middot; Shargorod &middot; Murafa &middot; Mohyliv-Podilskyi &middot; New York &middot; Florida &middot; Haifa</p>
+</div>
+
+<script>
+// ============ DATA ============
+const people = {
+  K01: { name: "Gdal (Gedalia) Krishtul", hebrew: "Gedalia", gender: "M", born: "c. 1770-1785", died: null, place: "Shargorod, Podolia", spouse: null, father: null, mother: null, children: "Meyer Leyb + more", relation: "7x great-grandfather", source: "1850 Revision List; 1858 Revision List; death records", verified: "Yes - Archival", notes: "Earliest known ancestor. Named in 1850 and 1858 revision lists as father of Meyer Leib. A death record for 'Naftula Itsek son of Gdal' (July 30, 1848, age 1, Shargorod) confirms Gdal had at least one other child besides Meyer Leyb — an infant who died in 1848. Lived during the Partitions of Poland, when Shargorod came under Russian Imperial control. The family name 'Krishtul' likely derives from a place name (Kristol/Krystynopol). Gdal is the founding patriarch whose name was passed down for four or more generations following Ashkenazi naming tradition.", direct: true },
+  K02: { name: "Meyer Leyb Krishtul", hebrew: "Meir Leib", gender: "M", born: "c. 1796", died: null, place: "Shargorod", spouse: "Charna bat Ioyna", father: "Gdal Krishtul", mother: null, children: "Gdal II, Moyshe Ayzyk, Borukh, Fayvish, Yankel, Naftul Itsik, Freyda, Rosya + more", relation: "6x great-grandfather", source: "1850 Revision List (age 54); 1858 Revision List (age 62); JewishGen births", verified: "Yes - Archival", notes: "Age 54 in Oct 1850 census, age 62 in 1858 revision — confirming he was still alive in 1858. Wife Charna also age 54 in 1850, 62 in 1858. Five sons confirmed in the 1850 revision list. Birth records add additional children: Naftul Itsik (1847, wife Tsivya/Yankel), Freyda (1851), and Rosya (1856), all in Shargorod. This makes Meyer Leyb the patriarch of the largest documented Krishtul generation — at least 8 known children. Favel-Meyer was listed in the earlier 1835 revision. Meyer Leyb was a craftsman.", direct: true },
+  K03: { name: "Charna bat Ioyna", hebrew: null, gender: "F", born: "c. 1796", died: null, place: null, spouse: "Meyer Leyb Krishtul", father: "Ioyna", mother: null, children: null, relation: "6x great-grandmother", source: "1850 Revision List (age 54); 1858 Revision List (age 62)", verified: "Yes - Archival", notes: "Wife of Meyer Leyb. Named in both the 1850 and 1858 revision lists.", direct: true },
+  K04: { name: "Moyshe Ayzyk Krishtul", hebrew: "Moshe Aizik", gender: "M", born: "c. 1821", died: "June 10, 1903", place: "Shargorod", spouse: "Kreyntsya (Krintsya) bat Sender", father: "Meyer Leyb Krishtul", mother: "Charna bat Ioyna", children: "Toyba Ginda, Ryvka Serlya, Srul, Usher Zeylik, Gdal + more", relation: "5x great-grandfather", source: "1850 Revision List (age 22); 1858 Revision List (age 30); death record 1903 (age 82)", verified: "Yes - Archival", notes: "Death record confirms age 82 at death on June 10, 1903 — placing his birth around 1821 (earlier than the 1850 revision estimate of c. 1828). Had three wives in sequence: (1) Khana Sura bat Sender, divorced 1849 (K67); (2) Kreyntsya (Krintsya) bat Sender, married c. 1849, mother of Toyba Ginda (1851), Ryvka Serlya (1855), and Srul (1857) — may have died between 1857 and 1870; (3) Gisya bat Gdal (K68), mother of Usher Zeylik (1870) and Gdal (1876). Both Khana Sura and Kreyntsya are recorded as daughters of 'Sender' — possibly sisters or possibly coincidence. Age 22 in Oct 1850, age 30 in 1858 revision. Wife Kreyntsya was age 20 in 1850, 28 in 1858.", direct: true },
+  K05: { name: "Kreyntsya (Krintsya) bat Sender", hebrew: null, gender: "F", born: "c. 1830", died: null, place: null, spouse: "Moyshe Ayzyk Krishtul", father: "Sender", mother: null, children: "Toyba Ginda, Ryvka Serlya, Srul", relation: "5x great-grandmother", source: "1850 Revision List (age 20); 1858 Revision List (age 28)", verified: "Yes - Archival", notes: "Listed as 'Krintsya/Gender' in 1850 revision (age 20), age 28 in 1858 revision. Also appears as 'Kreynsa/Sender' in birth records. Second wife of Moyshe Ayzyk — married after his 1849 divorce from Khana Sura bat Sender (K67). Like Khana Sura, Kreyntsya is also recorded as a daughter of 'Sender.' Mother of Toyba Ginda (1851), Ryvka Serlya (1855), and Srul (1857). Later children (Usher Zeylik 1870, Gdal 1876) list a different mother (Gisya), suggesting Kreyntsya died between 1857 and 1870 and Moyshe Ayzyk took a third wife.", direct: true },
+  K06: { name: "Toyba Ginda Krishtul", hebrew: null, gender: "F", born: "December 18, 1851", died: null, place: "Shargorod", spouse: null, father: "Moyshe Ayzyk", mother: "Kreyntsya/Sender", children: null, relation: "4x great-aunt", source: "Birth rec DAViO/904/26/3 F51", verified: "Yes - JewishGen", notes: "Eldest known child of Moyshe Ayzyk. Discovered in JewishGen birth records.", direct: false },
+  K07: { name: "Ryvka Serlya Krishtul", hebrew: null, gender: "F", born: "April 28, 1855", died: null, place: "Shargorod", spouse: null, father: "Moyshe Ayzyk", mother: "Kreynsa/Sender", children: null, relation: "4x great-aunt", source: "Birth rec DAViO/904/26/3 F29", verified: "Yes - JewishGen", notes: "Confirmed by birth record. Grandfather listed as Meyr Leyb.", direct: false },
+  K08: { name: "Srul (Israel) Krishtul", hebrew: "Yisrael HaKohen", gender: "M", born: "December 22, 1857", died: "February 25, 1880", place: "Shargorod", spouse: null, father: "Moyshe Ayzyk", mother: "Kreyntsya bat Sender", children: "Miron Srulevich", relation: "4x great-grandfather", source: "Birth rec DAViO/904/26/3 M60", verified: "Yes - JewishGen", notes: "Birth record confirms: father Moyshe Ayzyk, grandfather Meyer Leyb, mother Kreynsa daughter of Sender. Tragically died at just 22 years old, leaving behind infant son Miron (born c. 1880). His death record confirms: age 23, father Moyshe Ayzyk, Shargorod. Kohen (priestly) lineage confirmed by great-great-grandson Lev's gravestone inscription 'HaKohen' — meaning the Kohen status traces back through this line.", direct: true },
+  K09: { name: "Usher Zeylik Krishtul", hebrew: null, gender: "M", born: "May 15, 1870", died: "January 23, 1897", place: "Shargorod", spouse: null, father: "Moyshe Ayzyk", mother: "Gisya bat Gdal", children: null, relation: "4x great-uncle", source: "Birth rec DAViO/904/26/24 M31; death rec ДАВіО/904/26/165 1897/M3", verified: "Yes - JewishGen (birth + death)", notes: "Mother listed as Gisya daughter of Gdal (K68) — Moyshe Ayzyk's third wife. Death confirmed at age 28 on January 23, 1897 in Shargorod. Died six years before his father Moyshe Ayzyk (d. 1903).", direct: false },
+  K10: { name: "Gdal Krishtul (son of Moyshe)", hebrew: null, gender: "M", born: "February 10, 1876", died: null, place: "Shargorod", spouse: null, father: "Moyshe Ayzyk", mother: "Gisya bat Gdal", children: null, relation: "4x great-uncle", source: "Birth rec DAViO/904/26/24 M18", verified: "Yes - JewishGen", notes: "Named after great-grandfather Gdal (the patriarch), following Ashkenazi naming tradition. Mother: Gisya bat Gdal (K68, Moyshe Ayzyk's third wife).", direct: false },
+  K11: { name: "Miron Srulevich Krishtul", hebrew: "Meir HaKohen", gender: "M", born: "c. 1880", died: null, place: "Murafa / Podolia", spouse: null, father: "Srul (Israel)", mother: null, children: "Israel Leib", relation: "3x great-grandfather", source: "Vital records; Raya's Shoah testimony; gravestone evidence", verified: "Yes - Archival", notes: "Patronymic 'Srulevich' means 'son of Srul,' confirming the father-son link. His father Srul died in February 1880, leaving Miron as an infant. Hebrew name Meir (Miron is the Russified form) — confirmed by his son Israel Leib's gravestone patronymic 'Meirovich' (= son of Meir). His family was from Murafa, near Shargorod. Would have been approximately 61 years old when the Holocaust reached Mohyliv-Podilskyi in 1941. No gravestone has been found and his death date is unknown — he likely perished during the Holocaust. The survival story Raya attributed to 'her father-in-law' (escaping Pechora camp, tailoring suits to survive) more likely describes his son Israel Leib, who was Raya's actual father-in-law and whose survival until 1948 is confirmed by gravestone. Vladimir's patronymic 'Mironovich' suggests Miron played a central role in the family before the war. Kohen (priestly) lineage confirmed by grandson Lev's gravestone inscription 'HaKohen.'", direct: true },
+  K12: { name: "Raya Moiseyevna Ripa", hebrew: null, gender: "F", born: "May 9, 1914", died: "January 12, 2004", place: "Shargorod (born), Yampol (raised), Mohyliv-Podilskyi (married)", spouse: "Lev Izrailovich Krishtul", father: "Moisha Ripa", mother: "Sonya Shvarts", children: "Vladimir, Maya, Bella, Yacov", relation: "Great-grandmother", source: "Shoah Foundation interview, April 17 1997, Brooklyn; burial record 2004", verified: "Yes - Shoah Foundation + burial record", notes: "Also known as Riva (Yiddish name). Born in Shargorod, raised in Yampol where her father Moisha was a respected barber and volunteer bank director. Married Lev Krishtul in 1936 after he visited her father's barbershop. Survived the Mohyliv-Podilskyi ghetto and Pechora death camp, but lost daughters Bella and Maya there. Escaped Pechora by climbing the fence with baby Vladimir, aided by a neighbor. Her husband Lev served at the front during WWII, returned end of 1945, but was accidentally killed by a gunshot at a bakery on March 23, 1947. Raya later emigrated to Brooklyn. Interviewed by Natasha Poselsky for the Shoah Foundation on April 17, 1997, age 83. She said: 'I would wish with all my soul that never, never, never should there be such an outbreak as the one we endured.' Died January 12, 2004, age 89. Buried in Washington Cemetery, McDonald Ave, Brooklyn, New York.", direct: true, holocaust: "survivor" },
+  K13: { name: "Yacov Krishtul", hebrew: null, gender: "M", born: "c. 1946", died: null, place: "Mohyliv-Podilskyi", spouse: null, father: "Lev Krishtul", mother: "Raya Moiseyevna", children: "Ella", relation: "Granduncle", source: "Family tree; Shoah Foundation (Raya's testimony)", verified: "Yes - Shoah Foundation", notes: "Also known as Yasha (Russian diminutive). Born after WWII. Son of Lev and Raya. Emigrated to Israel (Haifa). His wife had a sister whose parents lived in Israel, which led to their emigration. Photographed with brother Vladimir in Haifa in 1996. Father of Ella (also known as Elochka), who was photographed with grandmother Raya in 1975 and 1985.", direct: false },
+  K14: { name: "Maya Krishtul", hebrew: null, gender: "F", born: null, died: "1941-1944 (Pechora camp)", place: "Mohyliv-Podilskyi", spouse: null, father: "Lev Krishtul", mother: "Raya Moiseyevna", children: null, relation: "Grandaunt", source: "Family tree; Shoah Foundation", verified: "Family record", notes: "Perished in Pechora death camp from hunger and pneumonia. Her mother Raya called her 'Mayechka.' Bella died first, then Maya. Buried in Pechora.", direct: false, holocaust: "perished" },
+  K15: { name: "Bella Krishtul", hebrew: null, gender: "F", born: null, died: "1941-1944 (Pechora camp)", place: "Mohyliv-Podilskyi", spouse: null, father: "Lev Krishtul", mother: "Raya Moiseyevna", children: null, relation: "Grandaunt", source: "Family tree; Shoah Foundation", verified: "Family record", notes: "Perished in Pechora death camp from hunger and cold — died before her sister Maya. Her mother Raya called her 'Belotchka.' Buried in Pechora.", direct: false, holocaust: "perished" },
+  K16: { name: "Vladimir Mironovich Krishtul", hebrew: null, gender: "M", born: "June 17, 1937", died: null, place: "Mohyliv-Podilskyi", spouse: "Bronya Kovalevna", father: "Lev Krishtul", mother: "Raya Moiseyevna", children: "Leon, Steve", relation: "Grandfather", source: "Soviet birth certificate; Shoah Foundation", verified: "Yes - Official", notes: "Also known as Vilya — confirmed match with Yad Vashem record for 'Vilya Krishtul, b.1937, Mogilev Podolski.' Patronymic 'Mironovich' (from great-grandfather Miron) rather than 'Lvovich' (from father Lev) — likely because Lev and Raya's 1936 chuppah was a religious ceremony not registered civilly, so Vladimir was registered under the household head Miron, or because Miron played a central role in raising Vladimir while Lev was at the front. Survived Pechora death camp as a toddler — his mother Raya handed him over the fence to a neighbor and climbed over herself. His sisters Maya and Bella perished there.", direct: true, holocaust: "survivor" },
+  K17: { name: "Bronya Kovalevna", hebrew: null, gender: "F", born: null, died: null, place: "Mohyliv-Podilskyi", spouse: "Vladimir Mironovich Krishtul", father: "Yakov Shukhmayster", mother: "Rahil/Rachel Shukhmayster", children: "Leon, Steve", relation: "Grandmother", source: "Family tree", verified: "Family record", notes: "Maiden name Kovalevna. Parents: Yakov Shukhmayster and Rahil/Rachel Shukhmayster (née Sadkovitz, grandmother Bayla Sadkovitz). Family from the Mohyliv-Podilskyi region. Shukhmayster records found in JewishGen dating back to the 1850s in Mohyliv-Podilskyi.", direct: true },
+  K18: { name: "Leon Vladimirovich Krishtul", hebrew: null, gender: "M", born: "August 13, 1962", died: null, place: "Mohyliv-Podilskyi", spouse: "Svetlana Pruzhansky", father: "Vladimir Krishtul", mother: "Bronya", children: "Max, Nicole", relation: "Father", source: "Soviet records", verified: "Yes", notes: "Known as 'Lyonya' by his grandmother Raya. Was the first family member to emigrate to America; after three years he brought over seven family members. Emigrated to the United States as part of the massive Soviet Jewish emigration wave (1989-2000), when approximately 700,000 Soviet Jews left the USSR.", direct: true },
+  K19: { name: "Steve Krishtul", hebrew: null, gender: "M", born: null, died: null, place: "Mohyliv-Podilskyi", spouse: "Lena", father: "Vladimir Krishtul", mother: "Bronya", children: "Eduard, Gabriel", relation: "Uncle", source: "Family tree; Shoah Foundation", verified: "Family record", notes: "Known as 'Slavochka' by his grandmother Raya. His wife Lena was photographed with him in 1985 in Mogilev-Podolsk.", direct: false },
+  K54: { name: "Eduard Krishtul", hebrew: null, gender: "M", born: null, died: null, place: "Mohyliv-Podilskyi", spouse: null, father: "Steve Krishtul", mother: null, children: "Aron", relation: "Cousin", source: "Family records", verified: "Yes", notes: "Son of Steve Krishtul (Max's uncle). Born in Mohyliv-Podilskyi.", direct: false },
+  K56: { name: "Aron Krishtul", hebrew: null, gender: "M", born: null, died: null, place: "Hollywood, Florida", spouse: null, father: "Eduard Krishtul", mother: null, children: null, relation: "First cousin once removed", source: "Family records", verified: "Yes", notes: "Son of Eduard Krishtul, grandson of Steve Krishtul.", direct: false },
+  K55: { name: "Gabriel Krishtul", hebrew: null, gender: "M", born: null, died: null, place: null, spouse: null, father: "Steve Krishtul", mother: null, children: null, relation: "Cousin", source: "Family records", verified: "Yes", notes: "Son of Steve Krishtul (Max's uncle).", direct: false },
+  K20: { name: "Max Leonidovich Krishtul", hebrew: null, gender: "M", born: "August 6, 1986", died: null, place: "Mohyliv-Podilskyi", spouse: "Larisa Tuchinskaya", father: "Leon Krishtul", mother: "Svetlana Pruzhansky", children: "Joshua, Allison, Jacob", relation: "Self", source: "Official records", verified: "Yes", notes: "Born in Mohyliv-Podilskyi in the final years of the USSR. Moved to New York City, then Miami, Florida. The tenth generation of the Krishtul family from Shargorod.", direct: true },
+  K21: { name: "Nicole Krishtul", hebrew: null, gender: "F", born: "January 4, 1996", died: null, place: "Manhattan, New York", spouse: null, father: "Leon Krishtul", mother: "Svetlana Pruzhansky", children: null, relation: "Sister", source: "Family tree", verified: "Family record", notes: "First American-born Krishtul. Born in Manhattan, New York.", direct: false },
+  K22: { name: "Larisa Tuchinskaya", hebrew: null, gender: "F", born: "January 7, 1988", died: null, place: null, spouse: "Max Leonidovich Krishtul", father: null, mother: null, children: "Joshua, Allison, Jacob", relation: "Wife", source: "Family records", verified: "Yes", notes: null, direct: true },
+  K23: { name: "Joshua Krishtul", hebrew: null, gender: "M", born: "September 8, 2018", died: null, place: "Hollywood, Florida", spouse: null, father: "Max Krishtul", mother: "Larisa Tuchinskaya", children: null, relation: "Son", source: "US birth records", verified: "Yes", notes: "Eleventh generation from Shargorod. Siblings: Allison and Jacob.", direct: true },
+  K24: { name: "Allison Krishtul", hebrew: null, gender: "F", born: "April 12, 2016", died: null, place: "Florida", spouse: null, father: "Max Krishtul", mother: "Larisa Tuchinskaya", children: null, relation: "Daughter", source: "Family records", verified: "Yes", notes: null, direct: true },
+  K25: { name: "Jacob Krishtul", hebrew: null, gender: "M", born: "February 3, 2023", died: null, place: "Florida", spouse: null, father: "Max Krishtul", mother: "Larisa Tuchinskaya", children: null, relation: "Son", source: "Family records", verified: "Yes", notes: null, direct: true },
+  K26: { name: "Gdal II Krishtul", hebrew: null, gender: "M", born: "c. 1824", died: "November 22, 1874", place: "Shargorod", spouse: "Tsyviya bat Moshko", father: "Meyer Leyb", mother: "Charna", children: "Mariyam, Gisya + more", relation: "5x great-uncle", source: "1850 Revision List (age 24); 1858 Revision List (age 32); death rec ДАВіО/904/26/1 1874/M31", verified: "Yes - Archival (birth + death)", notes: "Named after his grandfather, the patriarch Gdal. Death record confirms age 50 on November 22, 1874 — placing birth around 1824. Age 32 in 1858 revision. Wife Tsyviya (daughter of Moshko) was age 20 in 1850, 28 in 1858. Daughters Mariyam (age 6 in 1850, 14 in 1858) and Gisya (age 2 in 1850, 10 in 1858) recorded in both revisions.", direct: false },
+  K27: { name: "Borukh Krishtul", hebrew: null, gender: "M", born: null, died: null, place: "Shargorod", spouse: null, father: "Meyer Leyb", mother: "Charna", children: "Pincus (Pavel)?", relation: "5x great-uncle", source: "1850 Revision List", verified: "Yes - Archival", notes: "Age not recorded in revision list. A Geni profile for Elena Krishtul (1905-1976) lists her father as 'Pincus (Pavel) son of Borukh Krishtul' and mother as 'Rosa daughter of Shevah Krishtul.' If this is the same Borukh, then Pincus/Pavel would be his son and Elena his granddaughter — a previously unknown branch.", direct: false },
+  K28: { name: "Fayvish (Favel Meyer) Krishtul", hebrew: null, gender: "M", born: "c. 1834", died: null, place: "Shargorod", spouse: "Reyzya bat Nisen", father: "Meyer Leyb", mother: "Charna", children: "Itsek, Leyzer, Srul, Ryvka, Gerts Yankel, Malka Beyla + more", relation: "5x great-uncle", source: "1850 Revision List (age 16); 1858 Revision List (age 24); birth records", verified: "Yes - Archival", notes: "Also called Favel-Meyer. Age 24 in 1858. Wife Reyzya (daughter of Nisen) was age 16 in 1850, 24 in 1858. Children born 1855-1878 in Shargorod. At least 6 children documented in birth records. Daughter Malka Beyla married in 1901.", direct: false },
+  K29: { name: "Yankel Krishtul", hebrew: null, gender: "M", born: "c. 1840", died: null, place: "Shargorod", spouse: "Rukhlya bat Yankel", father: "Meyer Leyb", mother: "Charna", children: "Itsek Shulim, Khana, Nekhama Gitlya, Gdal, Srul + more", relation: "5x great-uncle", source: "1850 Revision List (age 10); 1858 Revision List (age 18)", verified: "Yes - Archival", notes: "Also known as Ioyna Yankel. Age 18 in 1858 revision. Wife's maiden name was GIKMAN, establishing an important connected family link. Multiple children in birth records. Daughter Khana (K71, born 1862) married Gersh Leyb SHAFIR in 1881.", direct: false },
+  K30: { name: "Itsek Krishtul", hebrew: null, gender: "M", born: "February 14, 1855", died: null, place: "Shargorod", spouse: null, father: "Fayvish Meyer", mother: "Reyzya/Nysen", children: null, relation: "Cousin (5x removed)", source: "Birth rec", verified: "Yes - JewishGen", notes: null, direct: false },
+  K31: { name: "Leyzer Krishtul", hebrew: null, gender: "M", born: "November 2, 1856", died: null, place: "Shargorod", spouse: null, father: "Fayvish Meyer", mother: "Reyzya/Nisen", children: "Nissen", relation: "Cousin (5x removed)", source: "Birth rec", verified: "Yes - JewishGen", notes: "Son of Fayvish Meyer. Father of Nissen Krishtul (K57) — confirmed by Nissen's patronymic 'Leiserovich' (= son of Leizer).", direct: false },
+  K32: { name: "Srul Krishtul (son of Fayvish)", hebrew: null, gender: "M", born: "January 12, 1858", died: null, place: "Shargorod", spouse: null, father: "Fayvish Meyer", mother: "Reyzya/Nisin", children: null, relation: "Cousin (5x removed)", source: "Birth rec", verified: "Yes - JewishGen", notes: "Same name as his cousin Srul (Max's ancestor), born just 3 weeks later!", direct: false },
+  K33: { name: "Ryvka Krishtul (dau of Fayvish)", hebrew: null, gender: "F", born: "March 20, 1878", died: null, place: "Shargorod", spouse: null, father: "Fayvish Meyer", mother: "Reyzya/Nisen", children: null, relation: "Cousin (5x removed)", source: "Birth rec", verified: "Yes - JewishGen", notes: null, direct: false },
+  K34: { name: "Gerts Yankel Krishtul", hebrew: null, gender: "M", born: "February 6, 1866", died: "January 4, 1895", place: "Shargorod", spouse: "Sosya Ryvka Fridman", father: "Fayvish Meyer", mother: "Reyzya/Nison", children: "Nuson (K73)", relation: "Cousin (5x removed)", source: "Birth rec; death rec; marriage rec 1890", verified: "Yes - JewishGen (birth + death + marriage)", notes: "Grandson of Gdal. Married Sosya Ryvka Fridman (father Avrum) in 1890. Son Nuson (K73) born August 1892, died September 1892 — an infant death just weeks after birth. Gerts Yankel himself died January 4, 1895, age 28.", direct: false },
+  K51: { name: "Svetlana Pruzhansky", hebrew: null, gender: "F", born: "June 10, 1963", died: null, place: "Mohyliv-Podilskyi", spouse: "Leon Krishtul", father: "Michael Pruzhansky", mother: "Yevgenia Pruzhansky", children: "Max, Nicole", relation: "Mother", source: "Family record", verified: "Yes", notes: "Daughter of Michael and Yevgenia Pruzhansky. Sister of Igor Pruzhansky.", direct: true },
+  P04: { name: "Michael Pruzhansky", hebrew: null, gender: "M", born: null, died: null, place: null, spouse: "Yevgenia Pruzhansky", father: null, mother: null, children: "Svetlana, Igor", relation: "Maternal grandfather", source: "Family tree", verified: "Family record", notes: "Father of Svetlana and Igor Pruzhansky.", direct: false },
+  P05: { name: "Yevgenia Pruzhansky", hebrew: null, gender: "F", born: null, died: null, place: null, spouse: "Michael Pruzhansky", father: "Motya Entin", mother: "Etya Pruzhanskaya", children: "Svetlana, Igor", relation: "Maternal grandmother", source: "Family tree", verified: "Family record", notes: "Mother of Svetlana and Igor Pruzhansky. Daughter of Motya Entin and Etya Pruzhanskaya.", direct: false },
+  K57: { name: "Nissen Krishtul", hebrew: null, gender: "M", born: "1884", died: "1970", place: "Shargorod", spouse: "Feyga Volukh", father: "Leyzer Krishtul", mother: null, children: "Mikhail, Efim", relation: "Cousin (4x removed)", source: "Facebook group / Cemetery database", verified: "Yes - Cemetery record + family testimony", notes: "Patronymic Leiserovich = son of Leizer (K31). Buried in Shargorod New Cemetery. Found via Facebook group post by Toly Krishtul (Feb 2020). Lyusya Melamud personally knew him, called him 'grandfather Nysaly'. Gave children mandarins and walnuts for Hanukkah. Had brothers and sisters who emigrated to America. Confirmed sons: Mikhail (born 1911) and Efim (born 1913). Yad Vashem records also list 'Nusn Krishtul, born 1920' and 'Naum Nisn Krishtul, born 1921' — both from Shargorod, both killed in WWII military service. Their patronymic 'Nisn' could point to Nissen as father, but Yad Vashem testimonies also strongly associate them with a separate Gdal + Leya branch in Shargorod. The linkage remains provisional — they may belong to this Nissen line OR to the Gdal + Leya reconstructed branch.", direct: false },
+  P06: { name: "Feyga Volukh", hebrew: null, gender: "F", born: null, died: null, place: "Shargorod", spouse: "Nissen Krishtul", father: null, mother: null, children: null, relation: "By marriage", source: "Facebook group", verified: "Family photo", notes: "Wife of Nissen Krishtul. Maiden name Volukh. Photo shared by Toly Krishtul in Facebook group.", direct: false },
+  K58: { name: "Efim Naumovich Krishtul", hebrew: "Khuna Nusinovich", gender: "M", born: "June 3, 1913", died: "1971", place: "Shargorod", spouse: "Raheli (dau of Gedal)", father: "Nissen Krishtul", mother: "Feyga Volukh", children: "Naum, Pinya, Toly", relation: "Cousin (3x removed)", source: "Facebook group / Gravestone", verified: "Yes - Gravestone + family testimony", notes: "Gravestone: КРИШТУЛ Ефим Наумович 1913-1971, Shargorod. Hebrew name Khuna Nusinovich confirms Nissen as father. Married Raheli, daughter of Gedal. Was expelled from Communist Party for meeting American Krishtul relatives who visited Kyiv.", direct: false },
+  K59: { name: "Naum Krishtul", hebrew: null, gender: "M", born: null, died: null, place: "Shargorod area", spouse: null, father: "Efim Krishtul", mother: "Raheli", children: null, relation: "Distant cousin", source: "Facebook group", verified: "Family photo + testimony", notes: "Son of Efim (grandson of Nissen). Note: A Yad Vashem record lists 'Naum Nisn Krishtul, born 1921, Shargorod' killed in WWII — this cannot be this Naum since Efim was born 1913 (only 8 in 1921). That Naum Nisn may be a direct son of Nissen (K57), or may belong to a separate Gdal + Leya Shargorod branch — the attribution remains provisional. Grandfather of Natalia Kryshtul. Photo shared showing Naum with brother Pinya.", direct: false },
+  K60: { name: "Pinya Krishtul", hebrew: null, gender: "M", born: null, died: null, place: "Shargorod area", spouse: null, father: "Efim Krishtul", mother: "Raheli", children: null, relation: "Distant cousin", source: "Facebook group", verified: "Family photo", notes: "Son of Efim, brother of Naum. Photo shared by Natalia Kryshtul.", direct: false },
+  K61: { name: "Toly Krishtul", hebrew: null, gender: "M", born: null, died: null, place: null, spouse: null, father: "Efim Krishtul", mother: "Raheli", children: null, relation: "Distant cousin", source: "Facebook group", verified: "Self-identified", notes: "Son of Efim. Posted the original Facebook group inquiry about Nissen Leiserovich. Living group member.", direct: false },
+  K62: { name: "Mikhail Naumovich Krishtul", hebrew: null, gender: "M", born: "May 5, 1911", died: "December 23, 1987", place: "Shargorod", spouse: "Manya Aleksandrovna", father: "Nissen Krishtul", mother: "Feyga Volukh", children: "Klavdia", relation: "Distant cousin", source: "Facebook group / Gravestone", verified: "Yes - Gravestone photo", notes: "Elder brother of Efim Naumovich (K58). Both sons of Nissen Krishtul. Patronymic 'Naumovich' confirms father was Nausen/Nissen. Gravestone inscription: 'The bright memory of you will forever remain in our hearts.' Buried next to brother Efim in Shargorod New Cemetery.", direct: false },
+  P07: { name: "Manya Aleksandrovna Krishtul", hebrew: null, gender: "F", born: "April 20, 1920", died: "July 19, 1984", place: "Shargorod", spouse: "Mikhail Naumovich Krishtul", father: null, mother: null, children: "Klavdia", relation: "By marriage", source: "Facebook group / Gravestone", verified: "Yes - Gravestone photo", notes: "Wife of Mikhail Naumovich. Died 3 years before her husband.", direct: false },
+  K63: { name: "Klavdia Prozorova (née Krishtul)", hebrew: null, gender: "F", born: null, died: null, place: "Shargorod area", spouse: null, father: "Mikhail Naumovich Krishtul", mother: "Manya Aleksandrovna", children: null, relation: "Distant cousin", source: "Facebook group", verified: "Self-identified", notes: "Daughter of Mikhail and Manya. Posted gravestone photo in Facebook group. Married name Prozorova. Alena Prozorova (Israel) is likely her daughter.", direct: false },
+  K64: { name: "Aaron Kristul (Proskurov patriarch)", hebrew: null, gender: "M", born: null, died: null, place: "Proskurov (now Khmelnytskyi)", spouse: null, father: null, mother: null, children: "6 daughters (names unknown)", relation: "Great-great-grandfather of Arthur Krishtul", source: "Facebook group", verified: "Family photo", notes: "From Proskurov, Podolia — same region as Shargorod (~120km apart). Had 6 daughters and a wife. Photo shared in Facebook group showing Aaron with his daughters and wife. Possible connection to Moshko Krishtul of Proskurov (father of Khaya, married 1868).", direct: false },
+  K65: { name: "Arthur Krishtul", hebrew: null, gender: "M", born: null, died: null, place: null, spouse: null, father: "Aaron Kristul (Proskurov)", mother: null, children: null, relation: "Distant relative (via Proskurov branch)", source: "Facebook group", verified: "Self-identified", notes: "Admin of the Krishtul's Facebook group. His great-great-grandfather Aaron Kristul was from Proskurov (now Khmelnytskyi), with his wife and 6 daughters. Proskurov is ~120km from Shargorod in the same Podolia region. Our archival records show Khaya Krishtul (father Moshko) married in Proskurov in 1868, suggesting a family connection.", direct: false },
+  K66: { name: "Lev Izrailovich Krishtul", hebrew: "Leib Meir HaKohen", gender: "M", born: "c. 1911", died: "March 23, 1947", place: "Murafa / Mohyliv-Podilskyi", spouse: "Raya Ripa", father: "Israel Leib Meirovich Krishtul", mother: null, children: "Vladimir, Maya, Bella, Yacov", relation: "Great-grandfather", source: "Gravestone in Mohyliv-Podilskyi; Shoah Foundation (Raya's testimony)", verified: "Yes - Gravestone + Shoah Foundation", notes: "Also known as Lyova. Gravestone reads: 'Лева Израилович Криштул, died 23/III/1947, age 36.' Hebrew inscription includes HaKohen, confirming Kohen (priestly) lineage. Epitaph: 'Peace to your ashes, dear husband, father and son.' Patronymic 'Izrailovich' (= son of Israel) confirms his father is Israel Leib Meirovich Krishtul. Shoah Foundation records list him as 'Lev Sulevich Krishtul, born 1910' — 'Sulevich' being the Yiddish rendering of 'son of Israel/Srul' (same name, different form). Came to Yampol to work as director of a mill, met Raya Ripa at her father's barbershop. Married 1936 with chuppah (religious ceremony). Served at the front during WWII, returned end of 1945. After the war managed a military warehouse. Killed accidentally when a bakery manager's son pulled a gun trigger and the bullet struck him in the throat. Buried next to his father Israel Leib in the Mohyliv-Podilskyi cemetery.", direct: true },
+  K69: { name: "Ella Krishtul", hebrew: null, gender: "F", born: null, died: null, place: "Mohyliv-Podilskyi", spouse: null, father: "Yacov Krishtul", mother: null, children: null, relation: "First cousin once removed", source: "Shoah Foundation (Raya's testimony, photo identification)", verified: "Yes - Shoah Foundation", notes: "Also known as Elochka (diminutive). Granddaughter of Raya, daughter of Yacov. Photographed with Raya in 1975 in Mogilev-Podolsk and in 1985 in Chernivtsi.", direct: false },
+  P08: { name: "Moisha Ripa", hebrew: null, gender: "M", born: null, died: "c. 1939", place: "Yampol, Vinnytsia region", spouse: "Sonya Shvarts", father: null, mother: null, children: "Raya, and 4 others", relation: "2x great-grandfather (maternal)", source: "Shoah Foundation (Raya's testimony)", verified: "Yes - Shoah Foundation", notes: "Raya's father. Respected barber in Yampol with his own barbershop. Also served as volunteer director of the local savings bank. Very religious — attended synagogue every Saturday. Read newspapers avidly and predicted the war was inevitable. Died approximately 2 years before WWII of prostate cancer. Photographed in 1935 in Yampol.", direct: false },
+  P09: { name: "Sonya Shvarts", hebrew: null, gender: "F", born: null, died: null, place: "Yampol, Vinnytsia region", spouse: "Moisha Ripa", father: null, mother: null, children: "Raya, and 4 others", relation: "2x great-grandmother (maternal)", source: "Shoah Foundation (Raya's testimony)", verified: "Yes - Shoah Foundation", notes: "Raya's mother. Maiden name Shvarts. Parents were from Shargorod. Her mother died early. Attended synagogue on Yom Kippur. Was beaten by Ukrainian policeman Zaremba when trying to slip through the ghetto fence. Had 5 children total.", direct: false },
+  K70: { name: "Israel Leib Meirovich Krishtul", hebrew: "Israel Leib HaKohen", gender: "M", born: null, died: "September 28, 1948", place: "Mohyliv-Podilskyi", spouse: null, father: "Miron Srulevich", mother: null, children: "Lev", relation: "2x great-grandfather", source: "Gravestone in Mohyliv-Podilskyi; patronymic chain analysis; Shoah Foundation (Raya's testimony)", verified: "Yes - Gravestone + patronymic evidence", notes: "Gravestone reads: 'Израиль Лейб Меирович Криштул, died 28/9/1948.' Patronymic 'Meirovich' (= son of Meir/Miron) confirms he is Miron's son. Named 'Israel' after his deceased grandfather Srul (Hebrew: Yisrael), following Ashkenazi naming tradition — Srul died in 1880, so the name was available. His son Lev's patronymic 'Izrailovich' (= son of Israel) confirms the father-son link. Raya's actual father-in-law — the survival details she attributed to 'her father-in-law' (a tailor who obtained a sewing machine and made suits to survive, escaped Pechora camp with help from locals who were paid and later repaid) most likely describe Israel Leib, whose survival until 1948 is confirmed by gravestone. Buried directly next to his son Lev in the Mohyliv-Podilskyi cemetery. Lev's gravestone epitaph — 'dear husband, father and son' — confirms his father was alive in 1947; Israel Leib died 18 months later in 1948.", direct: true, holocaust: "survivor" },
+  P10: { name: "Lena", hebrew: null, gender: "F", born: null, died: null, place: "Mohyliv-Podilskyi", spouse: "Steve Krishtul", father: null, mother: null, children: "Eduard, Gabriel", relation: "Aunt-in-law", source: "Shoah Foundation (Raya's photo identification)", verified: "Yes - Shoah Foundation", notes: "Wife of Steve Krishtul. Photographed with Steve in 1985 in Mogilev-Podolsk.", direct: false },
+  K67: { name: "Khana Sura bat Sender", hebrew: null, gender: "F", born: null, died: null, place: "Shargorod", spouse: "Moyshe Ayzyk Krishtul", father: "Sender", mother: null, children: null, relation: "Former spouse of 5x great-grandfather", source: "JewishGen Marriage Records (1849 divorce record)", verified: "Yes - JewishGen", notes: "Appears in the 1849 divorce record of Moyshe Ayzyk Krishtul. This is Moyshe Ayzyk's first known wife — the marriage ended in divorce. Like Kreyntsya (K05), she is recorded as a daughter of 'Sender,' raising the possibility they may have been sisters, though this could also be coincidence. After this divorce, Moyshe Ayzyk married Kreyntsya (c. 1849).", direct: false },
+  K68: { name: "Gisya bat Gdal", hebrew: null, gender: "F", born: null, died: null, place: "Shargorod", spouse: "Moyshe Ayzyk Krishtul", father: "Gdal", mother: null, children: "Usher Zeylik, Gdal (1876)", relation: "Later spouse of 5x great-grandfather", source: "JewishGen Birth Records (mother in later births to Moyshe Ayzyk)", verified: "Probable - internal reconstruction", notes: "Third wife of Moyshe Ayzyk Krishtul. Identified from birth records where later children of Moyshe Ayzyk (Usher Zeylik born 1870, Gdal born 1876) list their mother as 'Gisya daughter of Gdal' rather than 'Kreyntsya daughter of Sender.' This suggests Kreyntsya died between 1857 and 1870, and Moyshe Ayzyk married Gisya. Her father's name 'Gdal' — the same as the Krishtul patriarch — is notable but no direct connection is established.", direct: false },
+  K71: { name: "Khana Krishtul", hebrew: null, gender: "F", born: "May 10, 1862", died: null, place: "Shargorod", spouse: "Gersh Leyb Shafir", father: "Yankel Krishtul", mother: "Rukhlya/Yankel", children: null, relation: "4x great-grandaunt", source: "Birth rec DAViO/904/26/3 F28; marriage rec DAViO/904/26/41 (1881)", verified: "Yes - JewishGen (birth + marriage)", notes: "Daughter of Ioyna Yankel (K29). Birth in 1862 and marriage in 1881 align — she was 19 at marriage. Married out into the SHAFIR family of Shargorod, establishing a cross-family link.", direct: false },
+  K72: { name: "Zus Krishtul", hebrew: null, gender: "M", born: "October 9, 1890", died: "November 3, 1891", place: "Shargorod", spouse: null, father: "Meyer Leyb (son of Favel)", mother: "Khaya", children: null, relation: "Collateral (Favel branch)", source: "Birth rec DAViO/904/26/82 M71; death rec ДАВіО/904/26/165 1891/M48", verified: "Yes - JewishGen (birth + death)", notes: "Infant son of Meyer Leyb (son of Favel, a separate person from the patriarch Meyer Leyb). Died at age 1. Part of the Meyer Leyb + Khaya household in the Fayvish/Favel branch.", direct: false },
+  K73: { name: "Nuson Krishtul", hebrew: null, gender: "M", born: "August 17, 1892", died: "September 3, 1892", place: "Shargorod", spouse: null, father: "Gerts Yankel Krishtul", mother: "Sosya Ryvka Fridman", children: null, relation: "Collateral (Favel branch)", source: "Birth rec DAViO/904/26/82 M71; death rec ДАВіО/904/26/165 1892/M31", verified: "Yes - JewishGen (birth + death)", notes: "Infant son of Gerts Yankel (K34). Died just 17 days after birth. His mother Sosya Ryvka Fridman (father Avrum) married Gerts Yankel in 1890.", direct: false },
+  K74: { name: "Favel Krishtul", hebrew: null, gender: "M", born: "August 2, 1901", died: "December 24, 1903", place: "Shargorod", spouse: null, father: "Nison Krishtul (son of Favel)", mother: "Golda", children: null, relation: "Collateral (Nison/Golda branch)", source: "Birth rec DAViO/904/26/174; death rec ДАВіО/904/26/165 1903/M44", verified: "Yes - JewishGen (birth + death)", notes: "Infant son in the Nison (son of Favel) + Golda cluster. Named after grandfather Favel, following Ashkenazi naming tradition. Died at age 2. This Nison + Golda branch is kept distinct from the separate Nisson + Feyga cluster.", direct: false },
+  K75: { name: "Ioyna Yankel Krishtul", hebrew: null, gender: "M", born: "February 14, 1908", died: "December 7, 1908", place: "Shargorod", spouse: null, father: "Gdal (son of Itsko)", mother: "Leya", children: null, relation: "Collateral (Gdal + Leya branch)", source: "Birth rec DAViO/904/26/174; death rec ДАВіО/904/26/165 1908/M31", verified: "Yes - JewishGen (birth + death)", notes: "Infant child in the reconstructed Gdal + Leya Shargorod branch. Died at 10 months old. Named after maternal grandfather Ioyna Yankel, following Ashkenazi naming tradition. This Gdal + Leya branch may also be connected to Holocaust victims listed in Yad Vashem.", direct: false },
+};
+
+
+const timelineData = [
+  { year: "c. 1770", event: "Gdal (Gedalia) Krishtul born", context: "First Partition of Poland (1772). Pale of Settlement established (1791).", location: "Shargorod, Podolia", type: "birth" },
+  { year: "c. 1796", event: "Meyer Leyb Krishtul born", context: "Napoleonic era. Jewish communities under Russian control.", location: "Shargorod", type: "birth" },
+  { year: "c. 1821", event: "Moyshe Ayzyk born", context: "Death record (1903, age 82) places birth around 1821. Jewish vital records mandated from 1835.", location: "Shargorod", type: "birth" },
+  { year: "1849", event: "Moyshe Ayzyk divorces Khana Sura, marries Kreyntsya", context: "Divorce from first wife Khana Sura bat Sender recorded in JewishGen. Shortly after, married Kreyntsya (also bat Sender). First documented family event in the vital records era.", location: "Shargorod", type: "" },
+  { year: "1850", event: "Family recorded in Imperial Russian revision list", context: "Meyer Leyb (54), wife Charna, 6 sons, 2 daughters-in-law, 3 grandchildren. The most complete snapshot of the family. Updated again in the 1858 revision (Meyer Leyb age 62, all family members aged accordingly).", location: "Shargorod", type: "" },
+  { year: "1857", event: "Srul (Israel) born — Max's 4x great-grandfather", context: "Shargorod Jewish population growing rapidly.", location: "Shargorod", type: "birth" },
+  { year: "1874", event: "Gdal II dies — November 22, age 50", context: "Meyer Leyb's eldest son. Named after the patriarch. Death record confirms age 50 in Shargorod.", location: "Shargorod", type: "" },
+  { year: "1880", event: "Srul dies at age 22; infant son Miron left behind", context: "First pogroms begin (1881). Mass emigration starts.", location: "Shargorod / Podolia", type: "" },
+  { year: "1884", event: "Nissen Krishtul born — son of Leyzer (K31)", context: "Son of Leyzer Krishtul. Would live to age 86 in Shargorod.", location: "Shargorod", type: "birth" },
+  { year: "1897", event: "Usher Zeylik dies January 23, age 28; Russian Imperial Census", context: "Usher Zeylik, son of Moyshe Ayzyk and Gisya, dies in Shargorod. That same year, the Imperial Census records Shargorod as 73% Jewish — 3,859 Jews live in the town.", location: "Shargorod", type: "" },
+  { year: "c. 1898", event: "Israel Leib Krishtul born — Max's 2x great-grandfather", context: "Son of Miron Srulevich. Named 'Israel' after his deceased grandfather Srul (Hebrew: Yisrael), following Ashkenazi naming tradition. Would become a tailor.", location: "Murafa / Podolia", type: "birth" },
+  { year: "1903", event: "Moyshe Ayzyk dies — June 10, age 82", context: "Max's 5x great-grandfather. The patriarch of Generation III. Had three wives and at least 5 children. Outlived son Srul (d. 1880), brother Gdal II (d. 1874), and son Usher Zeylik (d. 1897).", location: "Shargorod", type: "" },
+  { year: "c. 1911", event: "Lev Krishtul born", context: "Son of Israel Leib Meirovich. Gravestone confirms age 36 at death in 1947. Would marry Raya Ripa in 1936.", location: "Murafa / Podolia", type: "birth" },
+  { year: "1911", event: "Mikhail Naumovich Krishtul born — May 5, son of Nissen", context: "Son of Nissen, grandson of Leyzer. Brother of Efim.", location: "Shargorod", type: "birth" },
+  { year: "1913", event: "Efim Krishtul born — June 3, son of Nissen", context: "Son of Nissen, grandson of Leyzer. Hebrew name: Khuna Nusinovich. Brother of Mikhail.", location: "Shargorod", type: "birth" },
+  { year: "1914", event: "Raya Ripa born — May 9", context: "Born in Shargorod, raised in Yampol. Her father Moisha was a barber and volunteer bank director. Would marry Lev Krishtul in 1936.", location: "Shargorod / Yampol", type: "birth" },
+  { year: "1936", event: "Lev Krishtul marries Raya Ripa", context: "Met at her father's barbershop in Yampol. Wedding with chuppah. They moved to Mohyliv-Podilskyi.", location: "Yampol", type: "" },
+  { year: "1937", event: "Vladimir Mironovich Krishtul born", context: "Stalin's Great Terror. Millions arrested and executed across the USSR.", location: "Mohyliv-Podilskyi", type: "birth" },
+  { year: "1941", event: "Nazi/Romanian occupation begins", context: "Over 55,000 Jews deported through Mohyliv-Podilskyi. Vladimir is 4 years old.", location: "Mohyliv-Podilskyi", type: "holocaust" },
+  { year: "1941-1944", event: "Krishtul family in Mohyliv-Podilskyi ghetto and Pechora death camp", context: "Raya and her children endured the ghetto, then were deported to Pechora. Bella and Maya perished. Raya escaped with Vladimir over the fence.", location: "Mohyliv-Podilskyi / Pechora", type: "holocaust" },
+  { year: "1944", event: "Liberation — March 20, 1944", context: "Shargorod and Mohyliv-Podilskyi liberated by Soviet forces.", location: "Mohyliv-Podilskyi", type: "" },
+  { year: "c. 1946", event: "Yacov Krishtul born", context: "Son of Lev and Raya, born after WWII. Would later emigrate to Israel with his family.", location: "Mohyliv-Podilskyi", type: "birth" },
+  { year: "1947", event: "Lev Krishtul killed accidentally — March 23", context: "After returning from the front, Lev managed a military warehouse. Killed by accidental gunshot at a bakery, age 36. Gravestone confirms exact date.", location: "Mohyliv-Podilskyi", type: "" },
+  { year: "1948", event: "Israel Leib Krishtul dies — September 28", context: "Son of Miron, father of Lev. Outlived his son by 18 months. Gravestone in Mohyliv-Podilskyi directly adjacent to Lev's.", location: "Mohyliv-Podilskyi", type: "" },
+  { year: "1962", event: "Leon Vladimirovich Krishtul born", context: "Soviet era. Cold War tensions.", location: "Mohyliv-Podilskyi", type: "birth" },
+  { year: "1970", event: "Nissen Krishtul dies in Shargorod, age 86", context: "Buried in Shargorod New Cemetery. Last of the old Shargorod generation.", location: "Shargorod", type: "" },
+  { year: "1971", event: "Efim Krishtul dies in Shargorod, age 58", context: "Gravestone: КРИШТУЛ Ефим Наумович 1913-1971.", location: "Shargorod", type: "" },
+  { year: "1986", event: "Max Leonidovich Krishtul born", context: "Chernobyl disaster (April 1986). Glasnost and perestroika.", location: "Mohyliv-Podilskyi", type: "birth" },
+  { year: "1989-91", event: "Krishtul family emigrates to New York City", context: "USSR collapses. 700,000 Soviet Jews emigrate. Leon was the first to leave; within three years he brought over seven family members.", location: "USSR to New York City", type: "" },
+  { year: "1996", event: "Nicole Krishtul born — first American-born Krishtul", context: "The first Krishtul born on American soil. Born in Manhattan, New York.", location: "Manhattan, New York", type: "birth" },
+  { year: "1997", event: "Raya Krishtul gives Shoah Foundation testimony", context: "Interviewed by Natasha Poselsky in Brooklyn, age 83. Detailed account of ghetto, Pechora camp, and family history.", location: "Brooklyn, USA", type: "" },
+  { year: "2004", event: "Raya Krishtul dies — January 12, age 89", context: "The last living link to the pre-war Krishtul family. Born in 1914 in Shargorod, she survived the Mohyliv-Podilskyi ghetto and Pechora death camp, lost two daughters, raised two sons, emigrated to Brooklyn, and gave Shoah Foundation testimony in 1997. Buried in Washington Cemetery, Brooklyn.", location: "Brooklyn, New York", type: "" },
+  { year: "2016", event: "Allison Krishtul born", context: "Max and Larisa's first daughter.", location: "Hollywood, Florida", type: "birth" },
+  { year: "2018", event: "Joshua Krishtul born", context: "Eleventh generation from Shargorod.", location: "Hollywood, Florida", type: "birth" },
+  { year: "2023", event: "Jacob Krishtul born", context: "Max and Larisa's youngest son.", location: "Hollywood, Florida", type: "birth" },
+];
+
+const holocaustRecords = [
+  { name: "Raisa Moiseevna Krishtul", birth: "May 9, 1914", place: "Russia", detail: "Gave testimony to Shoah Foundation on April 17, 1997 in Brooklyn. Max's great-grandmother. Survived the Mohyliv-Podilskyi ghetto and Pechora death camp. Died January 12, 2004, age 89.", fate: "survived", family: true },
+  { name: "Lev Izrailovich Krishtul", birth: "c. 1911", place: "Mohyliv-Podilskyi", detail: "Son of Israel Leib Meirovich. Also known as Lyova. Hebrew name Leib Meir HaKohen — confirming Kohen priestly lineage. Served at the front during WWII. Killed accidentally March 23, 1947, age 36. Gravestone confirmed in Mohyliv-Podilskyi cemetery.", fate: "survived", family: true },
+  { name: "Israel Leib Meirovich Krishtul", birth: null, place: "Mohyliv-Podilskyi", detail: "Max's 2x great-grandfather. Raya's actual father-in-law. A tailor who obtained a sewing machine and made suits to survive. Locals were paid to help him escape Pechora camp, and he later repaid them. Survived until September 28, 1948.", fate: "survived", family: true },
+  { name: "Vladimir Krishtul", birth: "June 17, 1937", place: "Mohyliv-Podilskyi", detail: "Age 4 when occupation began. Max's grandfather. Survived Pechora death camp as a toddler — his mother handed him over the fence to a neighbor and climbed over herself. Confirmed as 'Vilya Krishtul' in Yad Vashem records.", fate: "survived", family: true },
+  { name: "Maya Krishtul", birth: null, place: "Mohyliv-Podilskyi", detail: "Daughter of Lev and Raya. Called 'Mayechka' by her mother. Died in Pechora death camp from hunger and pneumonia.", fate: "perished", family: true },
+  { name: "Bella Krishtul", birth: null, place: "Mohyliv-Podilskyi", detail: "Daughter of Lev and Raya. Called 'Belotchka' by her mother. Died first of the two sisters in Pechora death camp, from hunger and cold.", fate: "perished", family: true },
+  { name: "Efim Naumovich Krishtul", birth: null, place: "Moghilev / Transnistria", detail: "Perished in Voronovtzi, near Mohyliv-Podilskyi.", fate: "perished" },
+  { name: "Klara Krishtul", birth: null, place: "Moghilev / Transnistria", detail: "Perished in Moghilev-Podolsky.", fate: "perished" },
+  { name: "Klara D. Krishtul", birth: "1930", place: "Moghilev / Transnistria", detail: "Born 1930, would have been 11 when occupation began. Murdered.", fate: "perished" },
+  { name: "Klava Krishtul", birth: null, place: "Moghilev / Transnistria", detail: "Perished in Voronovtzi with Efim (possibly his wife).", fate: "perished" },
+  { name: "Idal/Idel Kristul", birth: null, place: "Moghilev County / Transnistria", detail: "On lists of Jews receiving/sending support in Transnistria.", fate: "unknown" },
+  { name: "Khaim Krishtul", birth: "1899", place: "Mogilev Podolskiy", detail: "From the same town as Vladimir. Murdered.", fate: "perished" },
+  { name: "Naum Nisn Krishtul", birth: "1921", place: "Shargorod", detail: "Born 1921 in Shargorod. Patronymic 'Nisn' could indicate son of Nissen (K57), but Yad Vashem testimonies also associate this name with a separate Gdal + Leya branch in Shargorod. Cannot be K59 Naum (Efim's son) since Efim was born 1913 and would have been only 8 in 1921. Branch attribution remains provisional. Killed in military service during WWII.", fate: "perished" },
+  { name: "Nusn Krishtul", birth: "1920", place: "Shargorod", detail: "Born 1920 in Shargorod. May be a son of Nissen Krishtul (K57) or may belong to the separate Gdal + Leya branch — attribution is provisional. Killed in military service during WWII.", fate: "perished" },
+  { name: "Leizer Krishtul", birth: "Sep 18, 1932", place: "Yaruga", detail: "Survivor. Gave testimony. Patronymic Failovich (= son of Fayvel/Fayvish), suggesting a possible connection to K28 Fayvish's branch.", fate: "survived" },
+];
+
+const discoveries = [
+  { type: "Birth + Death Match", title: "Srul died at 22, leaving infant Miron", detail: "Birth record (Dec 22, 1857) and death record (Feb 25, 1880) both name father 'Moyshe Ayzik' and match on age. Srul's death at just 22 meant his son Miron grew up without a father.", confidence: "CONFIRMED" },
+  { type: "Holocaust Survivor Identified", title: "Raya Moiseyevna gave Shoah Foundation testimony", detail: "The Shoah Foundation database lists 'Krishtul Raisa Moiseevna, born May 9, 1914' as a survivor who gave testimony. This is Max's great-grandmother.", confidence: "CONFIRMED" },
+  { type: "Naming Tradition", title: "The name 'Gdal' spans four+ generations", detail: "Patriarch Gdal (c. 1770) had his name carried forward: grandson Gdal II (c. 1826), great-grandson Gdal (1876), and it appears in the 1888 revision list (Gdal, age 61). Classic Ashkenazi tradition of naming after deceased ancestors.", confidence: "CONFIRMED" },
+  { type: "Two Cousins Named Srul", title: "Two Srul Krishtuls born 3 weeks apart in 1858", detail: "Max's ancestor Srul (born Dec 22, 1857, father Moyshe Ayzik) and cousin Srul (born Jan 12, 1858, father Fayvel Meyer) — cousins born just weeks apart with the same traditional family name.", confidence: "CONFIRMED" },
+  { type: "Connected Family", title: "GIKMAN family linked through three generations", detail: "The GIKMAN surname appears both as bride (Rukhlya GIKMAN married Yankel Krishtul, 1857) and as mother's maiden name (Srul born 1874, mother maiden GIKMAN). This three-generation chain (Yankel → Iona Yankel → Srul) proves the inter-family connection.", confidence: "CONFIRMED" },
+  { type: "Daughters Married Out", title: "Krishtul women entered BOBICH and SHAFIR families", detail: "Khaya Krishtul (father Moshko, Proskurov) married Shaya BOBICH in 1868. Khana Krishtul (father Ioyna Yankel, Shargorod) married Gersh Leyb SHAFIR in 1881. Tracing these married-out daughters expands the extended family network.", confidence: "CONFIRMED" },
+  { type: "Confirmed Identity Match", title: "Vilya Krishtul is grandfather Vladimir", detail: "A Yad Vashem record lists 'Vilya Krishtul, born 1937, Mogilev Podolski.' Confirmed to be Vladimir Mironovich Krishtul — 'Vilya' was his diminutive name.", confidence: "CONFIRMED" },
+  { type: "Spouse Sequence Confirmed", title: "Moyshe Ayzyk had three wives — divorce, death, and remarriage", detail: "The full spouse sequence is now reconstructed: (1) Khana Sura bat Sender — married and divorced in 1849 (K67, from JewishGen marriage records); (2) Kreyntsya bat Sender — married c. 1849, mother of Toyba Ginda (1851), Ryvka Serlya (1855), and Srul (1857), likely died between 1857 and 1870; (3) Gisya bat Gdal (K68) — mother of Usher Zeylik (1870) and Gdal (1876). Notably, both Khana Sura and Kreyntsya are recorded as daughters of 'Sender' — raising the intriguing possibility they were sisters.", confidence: "CONFIRMED" },
+  { type: "Facebook Group Discovery", title: "Nissen Leiserovich connects living family to archival tree", detail: "Toly Krishtul's Facebook post identified Nissen Leiserovich Krishtul (1884-1970) in Shargorod. Patronymic 'Leiserovich' = son of Leizer, potentially connecting to K31 Leyzer (b.1856, son of Fayvish Meyer). Living descendants include Toly Krishtul and Natalia Kryshtul. Lyusya Melamud personally knew Nissen.", confidence: "HIGH" },
+  { type: "Facebook Group Discovery", title: "American Krishtuls visited Efim in Kyiv (Soviet era)", detail: "Natalia Kryshtul revealed that Nissen had 'brothers and sisters in America who came to Kyiv and met Chaim/Efim.' After this meeting, Efim was expelled from the Communist Party and forced to sign papers terminating ties with American relatives. This suggests some of the Krishtuls from our archival tree emigrated to America.", confidence: "CONFIRMED" },
+  { type: "Separate Branch Identified", title: "Zhitomir Krishtul branch (Benjamin Schatz)", detail: "Benjamin Schatz's great-grandmother Basya Krishtul was from Zhitomir (1860s), daughter of Yankel (b.1836), son of Itkzo (b.1782), son of Avram — all from Zhitomir. A separate branch from the Shargorod line, going back to the 1700s.", confidence: "CONFIRMED" },
+  { type: "Facebook Group Discovery", title: "Proskurov branch discovery", detail: "Arthur Krishtul, admin of the Krishtul's Facebook group, traced his great-great-grandfather Aaron Kristul to Proskurov (now Khmelnytskyi) with his wife and 6 daughters. Proskurov is ~120km from Shargorod in the same Podolia region. Archival records show Khaya Krishtul (father Moshko) married in Proskurov in 1868, suggesting connection between Proskurov and Shargorod branches.", confidence: "CONFIRMED" },
+  { type: "Gravestone Discovery", title: "Lev Krishtul's gravestone confirms exact dates, Kohen lineage, and father Israel Leib", detail: "Gravestone in Mohyliv-Podilskyi cemetery reads 'Лева Израилович Криштул, died 23/III/1947, age 36' with Hebrew inscription including HaKohen. This confirms: (1) Death date March 23, 1947, (2) Birth c. 1911, (3) Kohen priestly lineage for the entire direct Krishtul line, (4) Patronymic 'Izrailovich' (= son of Israel) identifies his father as Israel Leib Meirovich Krishtul — not Miron, as previously assumed.", confidence: "CONFIRMED" },
+  { type: "Kohen Lineage Discovery", title: "The Krishtul direct line are Kohanim — of priestly descent", detail: "Lev Krishtul's gravestone bears the Hebrew designation HaKohen, confirming the family's priestly status. This Kohen lineage runs through the direct line: Srul (Israel) → Miron (Meir) → Israel Leib → Lev (Leib Meir) → Vladimir → Leon → Max. The Kohen designation means the family traces patrilineal descent to Aaron, brother of Moses — an unbroken line spanning over 3,000 years.", confidence: "CONFIRMED" },
+  { type: "Patronymic Chain Discovery", title: "Perfect patronymic chain reveals Israel Leib as missing generation between Miron and Lev", detail: "Analysis of patronymics across four generations produces a perfect chain: Miron SRULEVICH (son of Srul ✓), Israel Leib MEIROVICH (son of Meir/Miron ✓), Lev IZRAILOVICH (son of Israel/Israel Leib ✓). Each patronymic matches the person directly above — no skipping required. The decisive evidence: Srul died in February 1880, making it impossible for him to be Lev's father (born c. 1911). The 'grandfather patronymic' theory was debunked by this death date. Israel Leib is not Lev's brother but his FATHER, adding an eleventh generation to the family tree.", confidence: "CONFIRMED" },
+  { type: "Gravestone Discovery", title: "Israel Leib Meirovich Krishtul — Lev's father, buried beside his son", detail: "A gravestone in Mohyliv-Podilskyi, directly adjacent to Lev's grave, reads 'Израиль Лейб Меирович Криштул, died 28/9/1948.' The patronymic 'Meirovich' (= son of Meir/Miron) confirms he is Miron's son. Originally thought to be Lev's brother, patronymic analysis proved he is Lev's FATHER: Lev's patronymic 'Izrailovich' (= son of Israel) matches Israel Leib's first name. A father buried next to his son, having outlived him by 18 months.", confidence: "CONFIRMED" },
+  { type: "Open Question", title: "Do Nusn and Naum Nisn belong to Nissen's line or the Gdal + Leya branch?", detail: "Yad Vashem lists 'Nusn Krishtul, born 1920' and 'Naum Nisn Krishtul, born 1921' — both from Shargorod, both killed in WWII military service. The patronymic 'Nisn' could indicate they are sons of Nissen Krishtul (K57), which would mean he lost two sons in the war. However, Yad Vashem testimonies (particularly Kats and Bargraser) also strongly associate these names with a separate Gdal + Leya branch in Shargorod. The attribution remains provisional. Confirmed sons of Nissen are Mikhail (1911) and Efim (1913).", confidence: "POSSIBLE" },
+  { type: "Potential Cross-Branch Marriage", title: "Efim's wife Raheli may link back to the main Krishtul line", detail: "Efim Krishtul (K58, born 1913) married 'Raheli, daughter of Gedal.' K10 is Gdal Krishtul (born 1876, son of Moyshe Ayzyk) — the timing works perfectly for him to be Raheli's father. If confirmed, this would mean the Fayvish/Leyzer/Nissen side branch reconnected with the Moyshe Ayzyk main line through marriage, with two branches of the family unknowingly marrying back together.", confidence: "POSSIBLE" },
+  { type: "Shoah Foundation Testimony", title: "Raya Krishtul's 1997 interview reveals family connections and Pechora camp details", detail: "Raya Krishtul (nee Ripa), interviewed April 17, 1997 in Brooklyn by Natasha Poselsky, described the Mohyliv-Podilskyi ghetto, the Pechora death camp where daughters Maya and Bella perished, her escape with toddler Vladimir over the camp fence, and her husband Lev's accidental death after the war. She referred to Miron as her father-in-law (though Miron was actually her husband's grandfather — Israel Leib, the intermediate generation, may not have been prominent enough to mention separately). Also identified a son Yacov (living in Israel) and granddaughter Ella (called Elochka) not previously in the tree.", confidence: "CONFIRMED" },
+];
+
+const connectedFamilies = [
+  { name: "GIKMAN", connection: "Wife of Yankel Krishtul (Meyer Leyb's son)", detail: "Rukhlya GIKMAN married into the Krishtul family in 1857. Her maiden name appears in birth records of the next generation, confirming the three-generation chain: Yankel Meyer → Iona Yankel → Srul (mother maiden GIKMAN)." },
+  { name: "SHUKHMAYSTER", connection: "Possible ancestors of grandmother Bronya", detail: "Shukhmayster records found in Mohyliv-Podilskyi — the same town as the Krishtul family. Zelman Iosif Shukhmayster born 1852 (father Itsko, grandfather Leyzer). 128 total matches in Ukraine databases." },
+  { name: "SADKOVITZ / SADKOVETS", connection: "Grandmother of Bronya Krishtul", detail: "Bayla Sadkovitz is recorded as Bronya's grandmother. Sadkovets records are heavily concentrated in Mohyliv-Podilskyi — same town as the Krishtuls. 104 total matches in Ukraine databases." },
+  { name: "PRUZHANSKY", connection: "Max's maternal family (through Svetlana)", detail: "Svetlana Pruzhansky is Max's mother. Her parents are Michael and Yevgenia Pruzhansky. Yevgenia's parents were Motya Entin and Etya Pruzhanskaya. 547 total matches in Ukraine databases — a very large family." },
+  { name: "ENTIN", connection: "Connected through Yevgenia Pruzhansky's father", detail: "Motya Entin married Etya Pruzhanskaya, producing Yevgenia (Max's maternal grandmother). Parents: Avrum and Yevgenia Entin. Sibling: Tsivia Entin. 1,359 matches across Ukraine." },
+  { name: "KITAY", connection: "Wife of Froim Krishtul (Kremenets branch)", detail: "Tsupa KITAY married Froim Krishtul in 1902 in Kremenets. Their children (Gitlya, Shmul, Mikhel) appear in birth records with mother maiden name KITAY." },
+  { name: "BOBICH", connection: "Husband of Khaya Krishtul", detail: "Shaya BOBICH married Khaya Krishtul (daughter of Moshko) in 1868 in Proskurov. A Krishtul daughter married out." },
+  { name: "SHAFIR", connection: "Husband of Khana Krishtul", detail: "Gersh Leyb SHAFIR married Khana Krishtul (daughter of Ioyna Yankel) in 1881 in Shargorod. From the Yankel branch." },
+  { name: "FRIDMAN", connection: "Wife of Gerts Yankel Krishtul (K34)", detail: "Sosya Ryvka FRIDMAN (father Avrum) married Gerts Yankel Krishtul in 1890 in Shargorod. Their infant son Nuson (K73) was born August 1892 but died just 17 days later. Gerts Yankel himself died in January 1895 at age 28." },
+  { name: "VOLUKH", connection: "Wife of Nissen Krishtul (K57)", detail: "Feyga VOLUKH married Nissen Krishtul. Photo of Nissen and Feyga Volukh shared by Toly Krishtul in the Krishtul's Facebook group. They lived in Shargorod." },
+  { name: "RIPA", connection: "Raya's maiden family (barbers of Yampol)", detail: "Raya's father Moisha Ripa was a barber and volunteer bank director in Yampol, Vinnytsia region. Mother Sonya (nee Shvarts) was from Shargorod. 5 children including Raya, a sister in Odessa, sister Anya in Chernivtsi, brother Mora Ripa (barber in Chernivtsi then America), and a youngest brother." },
+  { name: "SHVARTS", connection: "Raya's maternal family (from Shargorod)", detail: "Sonya Shvarts married Moisha Ripa. Her parents were from Shargorod — the same town where the Krishtul family originated. This creates a geographic link between the Ripa and Krishtul families through Shargorod." },
+];
+
+// ============ RENDER FUNCTIONS ============
+function renderTimeline() {
+  const container = document.getElementById('timeline-content');
+  const eras = [
+    { label: 'Imperial Russia &middot; 1770&ndash;1917', before: 0 },
+    { label: 'Early Soviet Era &middot; 1903&ndash;1940', before: 11 },
+    { label: 'The Holocaust &middot; 1941&ndash;1945', before: 18 },
+    { label: 'Post-War Soviet Life &middot; 1945&ndash;1989', before: 20 },
+    { label: 'A New Chapter &middot; 1989&ndash;Present', before: 28 },
+  ];
+  let html = '';
+  timelineData.forEach((item, i) => {
+    const era = eras.find(e => e.before === i);
+    if (era) html += `<div class="timeline-era">${era.label}</div>`;
+    html += `
+    <div class="timeline-item ${item.type}">
+      <div class="timeline-year">${item.year}</div>
+      <div class="timeline-event">${item.event}</div>
+      <div class="timeline-context">${item.context}</div>
+      <div class="timeline-location">${item.location}</div>
+    </div>`;
+  });
+  container.innerHTML = html;
+}
+
+function renderHolocaust() {
+  // Memorial stats
+  const stats = document.getElementById('memorial-stats');
+  const survived = holocaustRecords.filter(r => r.fate === 'survived').length;
+  const perished = holocaustRecords.filter(r => r.fate === 'perished').length;
+  const unknown = holocaustRecords.filter(r => r.fate === 'unknown').length;
+  const familyCount = holocaustRecords.filter(r => r.family).length;
+  stats.innerHTML = `
+    <div class="memorial-stat"><span class="memorial-stat-dot survived"></span>${survived} survived</div>
+    <div class="memorial-stat"><span class="memorial-stat-dot perished"></span>${perished} perished</div>
+    ${unknown ? `<div class="memorial-stat"><span class="memorial-stat-dot unknown"></span>${unknown} unknown</div>` : ''}
+    <div class="memorial-stat" style="opacity:0.6">${familyCount} direct family &middot; ${holocaustRecords.length} total records</div>
+  `;
+  // Grid
+  const grid = document.getElementById('holocaust-grid');
+  grid.innerHTML = holocaustRecords.map(r => `
+    <div class="memorial-card ${r.fate === 'survived' ? 'survivor' : ''} ${r.family ? 'family' : ''}">
+      <div class="person-name">${r.name}</div>
+      ${r.birth ? `<div class="detail">Born: ${r.birth}</div>` : ''}
+      ${r.place ? `<div class="detail">${r.place}</div>` : ''}
+      <div class="detail" style="margin-top:8px">${r.detail}</div>
+      <span class="fate ${r.fate === 'perished' ? 'fate-perished' : r.fate === 'survived' ? 'fate-survived' : 'fate-unknown'}">
+        ${r.fate === 'perished' ? 'Perished' : r.fate === 'survived' ? 'Survived' : 'Unknown'}
+      </span>
+    </div>
+  `).join('');
+}
+
+function renderDiscoveries() {
+  const container = document.getElementById('discoveries-content');
+  container.innerHTML = discoveries.map(d => `
+    <div class="discovery-card ${d.confidence === 'CONFIRMED' ? 'conf-card-confirmed' : d.confidence === 'HIGH' ? 'conf-card-high' : 'conf-card-possible'}">
+      <div class="discovery-type">${d.type} <span class="confidence-badge ${d.confidence === 'CONFIRMED' ? 'conf-confirmed' : d.confidence === 'HIGH' ? 'conf-high' : 'conf-possible'}">${d.confidence}</span></div>
+      <div class="discovery-title">${d.title}</div>
+      <div class="discovery-detail">${d.detail}</div>
+    </div>
+  `).join('');
+}
+
+function renderFamilies() {
+  const container = document.getElementById('families-content');
+  container.innerHTML = connectedFamilies.map(f => {
+    // Count people mentioning this family name
+    const surname = f.name.split(' ')[0].replace(/\//g,'');
+    const mentions = Object.values(people).filter(p =>
+      (p.name && p.name.includes(surname)) ||
+      (p.spouse && p.spouse.includes(surname)) ||
+      (p.mother && p.mother.includes(surname))
+    ).length;
+    return `
+    <div class="family-card">
+      <div class="family-name">${f.name}${mentions ? `<span style="font-size:0.65rem;font-weight:400;color:var(--text-muted);margin-left:8px;">${mentions} in tree</span>` : ''}</div>
+      <div class="family-connection">${f.connection}</div>
+      <div class="family-detail">${f.detail}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderAllMembers() {
+  const container = document.getElementById('all-members');
+  const entries = Object.entries(people);
+  container.innerHTML = entries.map(([id, p]) => `
+    <div class="person-card ${p.direct ? 'direct' : ''} ${p.gender === 'M' ? 'male' : 'female'} member-card"
+         onclick="showPerson('${id}')"
+         data-search="${(p.name + ' ' + (p.hebrew||'') + ' ' + (p.born||'') + ' ' + (p.died||'') + ' ' + (p.place||'') + ' ' + (p.relation||'') + ' ' + (p.spouse||'') + ' ' + (p.father||'') + ' ' + (p.mother||'') + ' ' + (p.source||'') + ' ' + (p.holocaust||'')).toLowerCase()}">
+      ${p.relation ? `<span class="person-relation">${p.relation}</span>` : ''}
+      <div class="person-name">${p.name}</div>
+      ${p.hebrew ? `<div class="person-hebrew">${p.hebrew}</div>` : ''}
+      ${p.born ? `<div class="person-dates">${p.born}${p.died ? ' — ' + p.died : ''}</div>` : ''}
+      ${p.place ? `<div class="person-place">${p.place}</div>` : ''}
+      ${p.direct ? '<span class="person-badge badge-direct">Direct Line</span>' : ''}
+      ${p.holocaust === 'survivor' ? '<span class="person-badge badge-survivor">Survivor</span>' : ''}
+      ${p.holocaust === 'perished' ? '<span class="person-badge badge-holocaust">Perished</span>' : ''}
+      ${p.source ? `<div class="person-source" title="${p.source.replace(/"/g, '&quot;')}">${p.source}</div>` : ''}
+    </div>
+  `).join('');
+  // Add count indicator
+  const countEl = document.getElementById('member-count');
+  if (countEl) countEl.textContent = entries.length + ' members';
+}
+
+// ============ MODAL ============
+function showPerson(id) {
+  const p = people[id];
+  if (!p) return;
+  const modal = document.getElementById('modal-content');
+  // Build badges
+  let badges = '';
+  if (p.direct) badges += '<span class="modal-badge badge-direct">Direct Line</span>';
+  if (p.holocaust === 'survivor') badges += '<span class="modal-badge badge-survivor">Holocaust Survivor</span>';
+  if (p.holocaust === 'perished') badges += '<span class="modal-badge badge-holocaust">Perished in Holocaust</span>';
+  // Build linked fields for family connections
+  const linkPerson = (name) => {
+    const match = Object.entries(people).find(([k,v]) => {
+      if (v.name === name || v.name.startsWith(name)) return true;
+      const rp = name.toLowerCase().split(/[\s()]+/).filter(Boolean);
+      const np = v.name.toLowerCase().split(/[\s()]+/).filter(Boolean);
+      if (rp.length >= 2 && np.length >= 2 && rp[0] === np[0] && rp[rp.length-1] === np[np.length-1]) return true;
+      return false;
+    });
+    if (match) return `<a href="#" class="modal-link" onclick="event.preventDefault();showPerson('${match[0]}')">${name}</a>`;
+    return name;
+  };
+  const linkList = (str, parentId) => str.split(', ').map(n => {
+    const clean = n.replace(/\s*\(.*?\)\s*/g, '').trim();
+    if (!clean || clean === '+ more') return n;
+    const parent = parentId ? people[parentId] : null;
+    // Try exact match first, then startsWith, then first-name match preferring children/parents
+    let match = Object.entries(people).find(([k,v]) => v.name === clean || v.name === n);
+    if (!match) match = Object.entries(people).find(([k,v]) => v.name && v.name.startsWith(clean + ' '));
+    if (!match) {
+      const candidates = Object.entries(people).filter(([k,v]) => v.name && v.name.split(' ')[0] === clean);
+      if (candidates.length === 1) match = candidates[0];
+      else if (candidates.length > 1 && parent) {
+        // Prefer candidates whose father or mother matches the current person
+        match = candidates.find(([k,v]) => v.father && parent.name && parent.name.startsWith(v.father.split(' ')[0]));
+        if (!match) match = candidates[0];
+      }
+    }
+    if (match) return `<a href="#" class="modal-link" onclick="event.preventDefault();showPerson('${match[0]}')">${n}</a>`;
+    return n;
+  }).join(', ');
+  const genderColor = p.gender === 'M' ? 'var(--male-border)' : 'var(--female-border)';
+  const topBorder = p.direct ? `border-top: 4px solid var(--direct-border);` : `border-top: 4px solid ${genderColor};`;
+  modal.style.cssText = topBorder;
+  modal.innerHTML = `
+    <button class="modal-close" onclick="document.getElementById('modal-overlay').classList.remove('open')">&times;</button>
+    <h2>${p.name}</h2>
+    ${p.hebrew ? `<div class="modal-hebrew">${p.hebrew}</div>` : '<div style="height:12px"></div>'}
+    ${badges ? `<div class="modal-badges">${badges}</div>` : ''}
+    <div class="modal-grid">
+      ${p.relation ? field('Relationship', p.relation) : ''}
+      ${p.gender ? field('Gender', p.gender === 'M' ? 'Male' : 'Female') : ''}
+      ${p.born ? field('Born', p.born) : ''}
+      ${p.died ? field('Died', p.died) : ''}
+      ${p.place ? field('Place', p.place, true) : ''}
+    </div>
+    <hr class="modal-divider">
+    <div class="modal-grid">
+      ${p.spouse ? field('Spouse', linkPerson(p.spouse)) : ''}
+      ${p.father ? field('Father', linkPerson(p.father)) : ''}
+      ${p.mother ? field('Mother', linkPerson(p.mother)) : ''}
+      ${p.children ? field('Children', linkList(p.children, id), true) : ''}
+    </div>
+    <hr class="modal-divider">
+    <div class="modal-grid">
+      ${p.source ? field('Source', p.source, true) : ''}
+      ${p.verified ? field('Verified', p.verified) : ''}
+    </div>
+    ${p.notes ? `<div class="modal-notes">${p.notes}</div>` : ''}
+    <div class="modal-id">${id}</div>
+    ${buildModalNav(id)}
+  `;
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function buildModalNav(currentId) {
+  const ids = Object.keys(people);
+  const idx = ids.indexOf(currentId);
+  const prev = idx > 0 ? ids[idx - 1] : null;
+  const next = idx < ids.length - 1 ? ids[idx + 1] : null;
+  if (!prev && !next) return '';
+  return `<div class="modal-nav">
+    ${prev ? `<button class="modal-nav-btn prev" onclick="event.stopPropagation();showPerson('${prev}')"><span class="nav-arrow">&lsaquo;</span><span class="nav-name">${people[prev].name.split(' ')[0]}</span></button>` : '<div></div>'}
+    ${next ? `<button class="modal-nav-btn next" onclick="event.stopPropagation();showPerson('${next}')"><span class="nav-name">${people[next].name.split(' ')[0]}</span><span class="nav-arrow">&rsaquo;</span></button>` : '<div></div>'}
+  </div>`;
+}
+
+function field(label, value, full) {
+  return `<div class="modal-field${full ? ' full' : ''}"><div class="modal-field-label">${label}</div><div class="modal-field-value">${value}</div></div>`;
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modal-overlay')) {
+    document.getElementById('modal-overlay').classList.remove('open');
+  }
+}
+
+// ============ SEARCH & FILTERS ============
+let activeFilter = null;
+
+function buildFilterChips() {
+  const entries = Object.entries(people);
+  const directCount = entries.filter(([,p]) => p.direct).length;
+  const maleCount = entries.filter(([,p]) => p.gender === 'M').length;
+  const femaleCount = entries.filter(([,p]) => p.gender === 'F').length;
+  const holocaustCount = entries.filter(([,p]) => p.holocaust).length;
+  const container = document.getElementById('filter-chips');
+  container.innerHTML = `
+    <button class="filter-chip active" data-filter="all">All<span class="chip-count">${entries.length}</span></button>
+    <button class="filter-chip" data-filter="direct">Direct Line<span class="chip-count">${directCount}</span></button>
+    <button class="filter-chip" data-filter="male">Male<span class="chip-count">${maleCount}</span></button>
+    <button class="filter-chip" data-filter="female">Female<span class="chip-count">${femaleCount}</span></button>
+    <button class="filter-chip" data-filter="holocaust">Holocaust<span class="chip-count">${holocaustCount}</span></button>
+  `;
+  container.querySelectorAll('.filter-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      container.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeFilter = chip.dataset.filter === 'all' ? null : chip.dataset.filter;
+      filterMembers();
+    });
+  });
+}
+
+function filterMembers() {
+  const q = document.getElementById('search').value.toLowerCase();
+  let visible = 0;
+  document.querySelectorAll('.member-card').forEach(card => {
+    let match = !q || card.dataset.search.includes(q);
+    if (match && activeFilter) {
+      if (activeFilter === 'direct') match = card.classList.contains('direct');
+      else if (activeFilter === 'male') match = card.classList.contains('male');
+      else if (activeFilter === 'female') match = card.classList.contains('female');
+      else if (activeFilter === 'holocaust') match = card.dataset.search.includes('survivor') || card.dataset.search.includes('perished');
+    }
+    card.style.display = match ? '' : 'none';
+    if (match) visible++;
+  });
+  const countEl = document.getElementById('member-count');
+  const noResults = document.getElementById('no-results');
+  const total = Object.keys(people).length;
+  countEl.textContent = (q || activeFilter) ? visible + ' of ' + total + ' members' : total + ' members';
+  noResults.style.display = visible === 0 ? '' : 'none';
+}
+
+// ============ NAV ============
+document.querySelectorAll('.nav-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.section).classList.add('active');
+    window.scrollTo({ top: document.querySelector('.nav').offsetTop, behavior: 'smooth' });
+  });
+});
+
+// ============ KEYBOARD ============
+let currentModalId = null;
+const _origShowPerson = showPerson;
+showPerson = function(id) { currentModalId = id; _origShowPerson(id); };
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { document.getElementById('modal-overlay').classList.remove('open'); currentModalId = null; }
+  // Arrow keys to navigate modal
+  if (currentModalId && document.getElementById('modal-overlay').classList.contains('open')) {
+    const ids = Object.keys(people);
+    const idx = ids.indexOf(currentModalId);
+    if (e.key === 'ArrowLeft' && idx > 0) { e.preventDefault(); showPerson(ids[idx - 1]); }
+    if (e.key === 'ArrowRight' && idx < ids.length - 1) { e.preventDefault(); showPerson(ids[idx + 1]); }
+  }
+  // Press "/" to jump to All Members and focus search
+  if (e.key === '/' && !e.ctrlKey && !e.metaKey && document.activeElement.tagName !== 'INPUT') {
+    e.preventDefault();
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    const allBtn = document.querySelector('[data-section="all"]');
+    allBtn.classList.add('active');
+    document.getElementById('all').classList.add('active');
+    setTimeout(() => document.getElementById('search').focus(), 100);
+  }
+});
+
+// ============ STAGGER ANIMATIONS ============
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const cards = entry.target.querySelectorAll('.person-card');
+      cards.forEach((card, i) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(16px)';
+        setTimeout(() => {
+          card.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, i * 60);
+      });
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.gen-row').forEach(row => observer.observe(row));
+
+// ============ SCROLL TO TOP ============
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('scroll-top');
+  if (window.scrollY > 400) btn.classList.add('visible');
+  else btn.classList.remove('visible');
+}, { passive: true });
+
+// ============ INIT ============
+renderTimeline();
+renderHolocaust();
+renderDiscoveries();
+renderFamilies();
+renderAllMembers();
+buildFilterChips();
+</script>
+</body>
+</html>
